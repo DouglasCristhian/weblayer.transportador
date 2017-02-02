@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weblayer.transportador.android.exp", "weblayer.transportador.android.exp\weblayer.transportador.android.exp.csproj", "{A81613A7-26AA-44BA-A595-04B67E1CF530}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weblayer.transportador.android.pro", "weblayer.transportador.android.pro\weblayer.transportador.android.pro.csproj", "{D408DD55-66BC-401E-ADB5-C84BEDAEB3FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "weblayer.transportador.core", "weblayer.transportador.core\weblayer.transportador.core.csproj", "{6629EF01-AA5B-4CE3-8526-F35B559B49CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A81613A7-26AA-44BA-A595-04B67E1CF530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A81613A7-26AA-44BA-A595-04B67E1CF530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A81613A7-26AA-44BA-A595-04B67E1CF530}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A81613A7-26AA-44BA-A595-04B67E1CF530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A81613A7-26AA-44BA-A595-04B67E1CF530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A81613A7-26AA-44BA-A595-04B67E1CF530}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D408DD55-66BC-401E-ADB5-C84BEDAEB3FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D408DD55-66BC-401E-ADB5-C84BEDAEB3FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D408DD55-66BC-401E-ADB5-C84BEDAEB3FA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D408DD55-66BC-401E-ADB5-C84BEDAEB3FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D408DD55-66BC-401E-ADB5-C84BEDAEB3FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D408DD55-66BC-401E-ADB5-C84BEDAEB3FA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6629EF01-AA5B-4CE3-8526-F35B559B49CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6629EF01-AA5B-4CE3-8526-F35B559B49CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6629EF01-AA5B-4CE3-8526-F35B559B49CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6629EF01-AA5B-4CE3-8526-F35B559B49CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
