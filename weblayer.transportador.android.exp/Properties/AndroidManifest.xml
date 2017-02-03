@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="weblayer.transportador.android.exp.weblayer.transportador.android.exp" android:versionCode="1" android:versionName="1.0">
-  <uses-sdk android:minSdkVersion="16" />
-  <application android:label="weblayer.transportador.android.exp"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="weblayer.transportador.android.exp" android:versionCode="1" android:versionName="1.0">
+	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="24" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<application android:label="W/Transportador Exp" android:theme="@style/MaterialTheme" android:largeHeap="true" android:hardwareAccelerated="false" android:icon="@mipmap/ic_launcher3"></application>
 </manifest>
+<!--.weblayer.transportador.android.exp-->
