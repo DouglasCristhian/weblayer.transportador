@@ -1,11 +1,11 @@
 using System;
-using Android.OS;
-using Android.Views;
-using Android.App;
-using Android.Support.V4.App;
 using System.Collections.Generic;
+using Android.App;
+using Android.OS;
+using Android.Support.V4.App;
+using Android.Views;
 
-namespace weblayer.transportador.android.exp.Activities
+namespace weblayer.transportador.android.exp.Fragments
 {
     [Activity(Label = "GenericFragmentPagerAdaptor")]
     public class GenericFragmentPagerAdaptor : FragmentPagerAdapter

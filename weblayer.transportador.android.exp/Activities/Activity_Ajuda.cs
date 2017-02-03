@@ -7,6 +7,7 @@ using Android.Support.V4.View;
 using Android.Views;
 using weblayer.transportador.android.exp.Activities;
 using Android;
+using weblayer.transportador.android.exp.Fragments;
 
 namespace weblayer.transportador.android.exp.Activities
 {

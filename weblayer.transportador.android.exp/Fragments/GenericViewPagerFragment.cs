@@ -2,7 +2,7 @@ using System;
 using Android.OS;
 using Android.Views;
 
-namespace weblayer.transportador.android.exp.Activities
+namespace weblayer.transportador.android.exp.Fragments
 {
     public class GenericViewPagerFragment : Android.Support.V4.App.Fragment
     {
