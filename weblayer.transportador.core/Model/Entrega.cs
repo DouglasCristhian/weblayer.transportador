@@ -46,5 +46,6 @@ namespace weblayer.transportador.core.Model
         public virtual string ds_ImageUri
         { get; set; }
 
+        public int fl_status { get; set; }
     }
 }

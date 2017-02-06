@@ -40,10 +40,11 @@ namespace weblayer.transportador.android.pro.Activities
         private TextView txtDataEntrega;
         private TextView txtHoraEntrega;
         private TextView lblObservacao;
+        private TextView lblStatus;
+        private TextView txtStatus;
         private Button btnEscanearNF;
         private Button btnAnexarImagem;
         private Button btnEnviar;
-        private Button btnCancelar;
         private Button btnEnviarViaEmail;
         private ImageView imageView;
         private byte[] bytes;
@@ -125,12 +126,19 @@ namespace weblayer.transportador.android.pro.Activities
                 menu.RemoveItem(Resource.Id.action_legenda);
             }
             else
+            { 
+                if ((entrega != null) && (entrega.fl_status == 1))
+                {
+                    menu.RemoveItem(Resource.Id.action_deletar);
+                }
+
                 menu.RemoveItem(Resource.Id.action_adicionar);
                 menu.RemoveItem(Resource.Id.action_ajuda);
                 menu.RemoveItem(Resource.Id.action_sobre);
                 menu.RemoveItem(Resource.Id.action_sair);
                 menu.RemoveItem(Resource.Id.action_sincronizar);
                 menu.RemoveItem(Resource.Id.action_legenda);
+            }
 
             return base.OnCreateOptionsMenu(menu);
         }
@@ -151,6 +159,8 @@ namespace weblayer.transportador.android.pro.Activities
             btnEnviar = FindViewById<Button>(Resource.Id.btnEnviar);
             btnEnviarViaEmail = FindViewById<Button>(Resource.Id.btnEnviarViaEmail);
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
+            lblStatus = FindViewById<TextView>(Resource.Id.lblStatus);
+            txtStatus = FindViewById<TextView>(Resource.Id.txtStatus);
 
             if (operacao == "selecionado")
             {
@@ -195,6 +205,19 @@ namespace weblayer.transportador.android.pro.Activities
                 bitmap = helper.ByteArrayToImage(entrega.Image);
                 imageView.SetImageBitmap(bitmap);
             }
+
+            lblStatus.Visibility = ViewStates.Visible;
+            txtStatus.Visibility = ViewStates.Visible;
+            
+            if (entrega.fl_status == 0)
+            {
+                txtStatus.Text = "Não Sincronizado";
+            }
+
+            if (entrega.fl_status == 1)
+            {
+                txtStatus.Text = "Sincronizado";
+            }
         }
 
         private void BindModel()
@@ -226,6 +249,8 @@ namespace weblayer.transportador.android.pro.Activities
                 txtDataEntrega.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtHoraEntrega.Text = DateTime.Now.ToString("HH:mm");
                 btnEnviarViaEmail.Visibility = ViewStates.Gone;
+                lblStatus.Visibility = ViewStates.Gone;
+                txtStatus.Visibility = ViewStates.Gone;
             }
 
             if (entrega != null && entrega.ds_observacao == "")

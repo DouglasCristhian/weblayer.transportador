@@ -61,11 +61,19 @@ namespace weblayer.transportador.android.pro.Adapters
                 descricaoocorrencia = "DEVOLUÇÃO";
 
             row.FindViewById<TextView>(Resource.Id.ds_NFE).Text = "NFe: " + mItems[position].ds_NFE;
-
             row.FindViewById<TextView>(Resource.Id.id_ocorrencia).Text = "Ocorrencia: " + descricaoocorrencia;
-
             row.FindViewById<TextView>(Resource.Id.dt_inclusao).Text = "Data de Inclusão: " + mItems[position].dt_inclusao.Value.ToString("dd/MM/yyyy HH:mm");
             row.FindViewById<TextView>(Resource.Id.dt_entrega).Text = "Data de Entrega: " + mItems[position].dt_entrega.Value.ToString("dd/MM/yyyy HH:mm");
+
+            if (mItems[position].fl_status == 0)
+            {
+                row.FindViewById<ImageView>(Resource.Id.imgView).SetBackgroundResource(Resource.Drawable.Cinza);
+            }
+
+            if (mItems[position].fl_status == 1)
+            {
+                row.FindViewById<ImageView>(Resource.Id.imgView).SetBackgroundResource(Resource.Drawable.Azul);
+            }
 
             return row;
         }

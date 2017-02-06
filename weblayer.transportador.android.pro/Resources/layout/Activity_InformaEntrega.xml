@@ -160,6 +160,25 @@
        android:layout_marginLeft = "18dip"
        android:inputType="text"/>
 
+    <TextView
+      android:id="@+id/lblStatus"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:layout_marginLeft = "18dip"
+      android:layout_marginRight = "18dip"
+      android:layout_marginTop="10dip"
+      android:text="Status"/>
+
+    <TextView
+       android:id="@+id/txtStatus"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textAppearance="?android:attr/textAppearanceSmall"
+       android:layout_marginRight = "18dip"
+       android:layout_marginLeft = "18dip"
+       android:inputType="text"/>
+
 
     <!--Botão anexar imagem-->
     <Button

@@ -15,6 +15,7 @@ using weblayer.transportador.core.BLL;
 using weblayer.transportador.android.pro.Adapters;
 using System.Threading;
 using weblayer.transportador.android.pro.Fragments;
+using weblayer.transportador.core.DAL;
 
 namespace weblayer.transportador.android.pro.Activities
 {
@@ -115,9 +116,9 @@ namespace weblayer.transportador.android.pro.Activities
                     new Thread(new ThreadStart(delegate
                     {
                         System.Threading.Thread.Sleep(1000);
-
+                        RunOnUiThread(() => SincronizarTeste());
                         //LOAD METHOD TO GET ACCOUNT INFO
-                        RunOnUiThread(() => Toast.MakeText(this, "Sincronizado com sucesso!", ToastLength.Short).Show());
+                       RunOnUiThread(() => Toast.MakeText(this, "Sincronizado com sucesso!", ToastLength.Short).Show());
 
                         //HIDE PROGRESS DIALOG
                         RunOnUiThread(() => progressDialog.Hide());
@@ -130,6 +131,20 @@ namespace weblayer.transportador.android.pro.Activities
                     dialog.Show(transaction, "dialog");
                     break;
             }
+        }
+
+        public void SincronizarTeste()
+        {
+            foreach (Entrega item in ListaEntregas)
+            {
+                EntregaRepository rep = new EntregaRepository();
+
+                item.fl_status = 1;
+                rep.Save(item);
+
+                FillList();
+            }
+
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

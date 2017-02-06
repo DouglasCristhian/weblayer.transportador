@@ -10,7 +10,7 @@
                 android:theme="@style/MaterialTheme" 
                 android:largeHeap="true" 
                 android:hardwareAccelerated="false" 
-                android:icon="@drawable/btnCamera">
+                android:icon="@drawable/ic_launcher3">
     
   </application>
 </manifest>

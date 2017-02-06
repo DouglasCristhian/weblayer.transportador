@@ -17,7 +17,6 @@ namespace weblayer.transportador.android.pro.Activities
         Android.Support.V7.Widget.Toolbar toolbar;
         ViewPager pager;
         GenericFragmentPagerAdaptor adapter;
-        private int TAG;
 
         protected override int LayoutResource
         {
@@ -30,8 +29,6 @@ namespace weblayer.transportador.android.pro.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            TAG = 1;
 
             toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             toolbar.Title = "Ajuda";
