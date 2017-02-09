@@ -585,12 +585,6 @@ namespace weblayer.transportador.android.exp.Activities
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
             alert.SetTitle("Tem certeza que deseja excluir este registro?");
-
-            alert.SetNegativeButton("Não", (senderAlert, args) =>
-            {
-
-            });
-
             alert.SetPositiveButton("Sim", (senderAlert, args) =>
             {
                 try
@@ -608,6 +602,9 @@ namespace weblayer.transportador.android.exp.Activities
                     Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
                 }
 
+            });
+            alert.SetNegativeButton("Não", (senderAlert, args) =>
+            {
             });
 
             RunOnUiThread(() =>
