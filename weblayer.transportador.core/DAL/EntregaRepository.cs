@@ -59,8 +59,8 @@ namespace weblayer.transportador.core.DAL
             if (List().Count > 0)
                 return;
 
-            Save(new Entrega { ds_NFE = "35160903703339000142550000000594611002684151", id_ocorrencia = 1, dt_inclusao = DateTime.Parse("2016/03/01"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Tudo certo", fl_status = 0 });
-            Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 2, dt_inclusao = DateTime.Parse("2016/04/22"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Tudo errado", fl_status = 1 });
+            //Save(new Entrega { ds_NFE = "35160903703339000142550000000594611002684151", id_ocorrencia = 1, dt_inclusao = DateTime.Parse("2016/03/01"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Tudo certo", fl_status = 0 });
+            //Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 2, dt_inclusao = DateTime.Parse("2016/04/22"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Tudo errado", fl_status = 1 });
         }
     }
 }

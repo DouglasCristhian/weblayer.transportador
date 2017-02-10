@@ -49,10 +49,15 @@ namespace weblayer.transportador.android.exp.Activities
 
         private string Novidades()
         {
-            string Novidades;
-            Novidades = " 1.2 (23/01/2017):"
-                                     + "\n\n    [Novo] Instruções de uso do aplicativo (Via menu 'Ajuda')"
-                                     + "\n    [Melhorias] Atualização dos ícones do menu";
+            var Novidades = " 1.3 (10/02/2017):"
+                + "\n[Melhorias] Correções no texto de ajuda"
+                + "\n\n";
+            
+            Novidades = Novidades + " 1.2 (23/01/2017):"
+                + "\n[Novo] Instruções de uso do aplicativo (Via menu 'Ajuda')"
+                + "\n[Melhorias] Atualização dos ícones do menu"
+                + "\n\n";
+
             return Novidades;
 
         }

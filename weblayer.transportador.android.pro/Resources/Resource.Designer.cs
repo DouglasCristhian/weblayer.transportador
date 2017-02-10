@@ -26,8 +26,6 @@ namespace weblayer.transportador.android.pro
 		
 		public static void UpdateIdValues()
 		{
-			global::weblayer.transportador.core.Resource.String.ApplicationName = global::weblayer.transportador.android.pro.Resource.String.ApplicationName;
-			global::weblayer.transportador.core.Resource.String.Hello = global::weblayer.transportador.android.pro.Resource.String.Hello;
 			global::ZXing.Mobile.Resource.Id.contentFrame = global::weblayer.transportador.android.pro.Resource.Id.contentFrame;
 			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::weblayer.transportador.android.pro.Resource.Layout.zxingscanneractivitylayout;
 			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::weblayer.transportador.android.pro.Resource.Layout.zxingscannerfragmentlayout;
