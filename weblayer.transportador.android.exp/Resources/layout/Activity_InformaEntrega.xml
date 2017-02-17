@@ -90,14 +90,19 @@
       android:layout_marginLeft="18dip"
       android:layout_marginRight="18dip"/>
 
-    <!--<Spinner
-      android:id="@+id/spinnerOcorrencia"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:layout_marginRight = "18dip"
-      android:layout_marginLeft = "18dip"
-      android:text="Código da NF"/>-->
+    <!-- Fake TextView to use to set in an error state to allow an error to be shown for the TextView -->
+    <android.widget.TextView
+        android:id="@+id/tvInvisibleError"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignRight="@+id/spnMySpinner"
+        android:layout_alignBottom="@+id/spnMySpinner"
+        android:layout_marginTop="0dp"
+        android:paddingTop="0dp"
+        android:paddingRight="50dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+            />
 
     <!--Data da Ocorrência-->
     <TextView

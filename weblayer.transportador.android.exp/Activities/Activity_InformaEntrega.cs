@@ -18,6 +18,7 @@ using Android.Support.V4.App;
 using Android;
 using Android.Graphics;
 using System.IO;
+using Android.Views.Animations;
 using JavaUri = Android.Net.Uri;
 using weblayer.transportador.core.BLL;
 
@@ -285,20 +286,55 @@ namespace weblayer.transportador.android.exp.Activities
         private bool ValidateViews()
         {
             var validacao = true;
-            if (txtCodigoNF.Length() == 0 || txtCodigoNF.Length() < 44 || txtCodigoNF.Length() > 44)
-            {
-                validacao = false;
-                txtCodigoNF.Error = "Código inválido! O código de barras deve ter 44 caracteres!";
-            }
 
             if (spinnerOcorrencia.SelectedItemPosition == 0)
             {
                 validacao = false;
-                Toast.MakeText(this, "Por favor, selecione a ocorrência", ToastLength.Short).Show();
+                SetError("Por favor, selecione a ocorrência");
+                //((TextView)spinnerOcorrencia.GetChildAt(0)).Error = ("Por favor, selecione a ocorrência");
+                //Toast.MakeText(this, "Por favor, selecione a ocorrência", ToastLength.Short).Show();
             }
+
+
+            if (txtCodigoNF.Length() == 0 || txtCodigoNF.Length() < 44 || txtCodigoNF.Length() > 44)
+            {
+                validacao = false;
+                txtCodigoNF.Error = "Código inválido! O código de barras deve ter 44 caracteres!";
+                txtCodigoNF.RequestFocus();
+            }
+
+            
 
             //TODO: TERMINAR VALIDAÇÕES
             return validacao;
+        }
+
+        public void SetError(String errorMessage)
+        {
+            View view = spinnerOcorrencia.GetChildAt(spinnerOcorrencia.SelectedItemPosition);
+
+            // Set TextView in Secondary Unit spinner to be in error so that red (!) icon
+            // appears, and then shake control if in error
+            TextView tvListItem = (TextView)view;
+
+            // Set fake TextView to be in error so that the error message appears
+            TextView tvInvisibleError = FindViewById<TextView>(Resource.Id.tvInvisibleError);  
+
+            // Shake and set error if in error state, otherwise clear error
+            if (errorMessage != null)
+            {
+                tvListItem.Error = errorMessage;
+                tvInvisibleError.Error=errorMessage;
+
+                tvListItem.RequestFocus();
+                tvInvisibleError.RequestFocus();
+
+            }
+            else
+            {
+                tvListItem.Error = null;
+                tvInvisibleError.Error=null;
+            }
         }
 
         private void SpinnerOcorrencia_ItemSelected(object sender, ItemSelectedEventArgs e)

@@ -31,6 +31,9 @@ namespace weblayer.transportador.android.exp.Activities
 
             core.DAL.Database.Initialize();
 
+
+            //Todo  Implemntar filtro par as ocorr ncias
+
             FindViews();
             BindData();
             FillList();
