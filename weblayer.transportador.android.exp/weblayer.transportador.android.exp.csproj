@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="Activities\Activity_Ajuda.cs" />
     <Compile Include="Activities\Activity_Base.cs" />
+    <Compile Include="Activities\Activity_FiltrarEntregas.cs" />
     <Compile Include="Activities\Activity_InformaEntrega.cs" />
     <Compile Include="Activities\Activity_Menu.cs" />
     <Compile Include="Activities\Activity_Novidades.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Fragments\GenericViewPagerFragment.cs" />
     <Compile Include="Helpers\ByteHelper.cs" />
     <Compile Include="Helpers\DatePicker_Helper.cs" />
+    <Compile Include="Helpers\DialogEventArgs.cs" />
     <Compile Include="Helpers\Mask.cs" />
     <Compile Include="Helpers\Substring_Helper.cs" />
     <Compile Include="Helpers\TimePicker_Helper.cs" />
@@ -359,6 +361,30 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_launcher3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_tune.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_tune.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_tune.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_tune.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_tune.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Activity_FiltrarEntregas.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\menu_toolbar_Filtro.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\EditTextStyle.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.24.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />

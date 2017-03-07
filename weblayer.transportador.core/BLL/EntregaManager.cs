@@ -1,14 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using weblayer.transportador.core.DAL;
 using weblayer.transportador.core.Model;
 
@@ -21,6 +11,11 @@ namespace weblayer.transportador.core.BLL
         public List<Entrega> GetEntrega()
         {
             return new EntregaRepository().List();
+        }
+
+        public List<Entrega> GetEntregaFiltro(int dataEmissao)
+        {
+            return new EntregaRepository().ListFiltro(dataEmissao);
         }
 
         public void Save(Entrega obj)
