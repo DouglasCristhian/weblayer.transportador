@@ -46,48 +46,34 @@ namespace weblayer.transportador.core.DAL
             return Database.GetConnection().Table<Entrega>().ToList();
         }
 
-        public List<Entrega> ListFiltro(int dataEmissao)
+        public List<Entrega> ListFiltro(int dataInclusao)
         {
-            DateTime intervalo_inicio = DateTime.Today;
-            DateTime intervalo_fim = DateTime.Today;
-            IEnumerable<Entrega> result_data;
+            DateTime intervalo_inicio = new DateTime(1900, 01, 01);
+            DateTime intervalo_fim = new DateTime(2020, 01, 01);
 
-            if (dataEmissao != 0)
+
+            if (dataInclusao == 1)
             {
-                #region FiltroData
-                if (dataEmissao == 1)
-                {
-                    intervalo_inicio = DateHelper.GetStartOfDay(DateTime.Today);
-                    intervalo_fim = DateHelper.GetEndOfDay(DateTime.Today);
-                }
-
-                if (dataEmissao == 2)
-                {
-                    intervalo_inicio = DateHelper.GetStartOfCurrentWeek();
-                    intervalo_fim = DateHelper.GetEndOfCurrentWeek();
-
-                    //result_data = from m in Database.GetConnection().Table<Entrega>().Where(x => x.dt_entrega >= intervalo_inicio && x.dt_entrega <= intervalo_fim) select m;
-                }
-
-                if (dataEmissao == 3)
-                {
-                    intervalo_inicio = DateHelper.GetStartOfCurrentMonth();
-                    intervalo_fim = DateHelper.GetEndOfCurrentMonth();
-                }
-
-                result_data = from m in Database.GetConnection().Table<Entrega>().
-                          Where(x => x.dt_inclusao >= intervalo_inicio && x.dt_inclusao <= intervalo_fim)
-                              select m;
+                intervalo_inicio = DateHelper.GetStartOfDay(DateTime.Today);
+                intervalo_fim = DateHelper.GetEndOfDay(DateTime.Today);
             }
-            else
+
+            if (dataInclusao == 2)
             {
-                result_data = from m in Database.GetConnection().Table<Entrega>().ToList() select m;
+                intervalo_inicio = DateHelper.GetStartOfCurrentWeek();
+                intervalo_fim = DateHelper.GetEndOfCurrentWeek();
             }
+
+            if (dataInclusao == 3)
+            {
+                intervalo_inicio = DateHelper.GetStartOfCurrentMonth();
+                intervalo_fim = DateHelper.GetEndOfCurrentMonth();
+            }
+
+            var result_data = Database.GetConnection().Query<Entrega>($@"SELECT * FROM Entrega where 
+            dt_inclusao>=@intervalo_inicio and dt_inclusao<=@intervalo_fim", intervalo_inicio, intervalo_fim);
 
             return result_data.ToList();
-            #endregion
-
-            //return Database.GetConnection().Table<Entrega>().ToList();
         }
 
         public void MakeDataMock()
@@ -97,7 +83,7 @@ namespace weblayer.transportador.core.DAL
 
             Save(new Entrega { ds_NFE = "35160903703339000142550000000594611002684151", id_ocorrencia = 1, dt_inclusao = DateTime.Parse("2017/02/05"), dt_entrega = DateTime.Parse("2017/02/05"), ds_observacao = "Tudo certo", fl_status = 0 });
             Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 2, dt_inclusao = DateTime.Parse("2017/01/10"), dt_entrega = DateTime.Parse("2017/01/10"), ds_observacao = "Tudo errado", fl_status = 1 });
-            Save(new Entrega { ds_NFE = "35160903703339000142550000000594611002684151", id_ocorrencia = 1, dt_inclusao = DateTime.Parse("2017/03/01"), dt_entrega = DateTime.Parse("2017/03/17"), ds_observacao = "Tudo certo", fl_status = 0 });
+            Save(new Entrega { ds_NFE = "35160903703339000142550000000594611002684151", id_ocorrencia = 1, dt_inclusao = DateTime.Parse("2017/03/08"), dt_entrega = DateTime.Parse("2017/03/17"), ds_observacao = "Tudo certo", fl_status = 0 });
             Save(new Entrega { ds_NFE = "35160903703339000142550000000594611002684151", id_ocorrencia = 1, dt_inclusao = DateTime.Parse("2017/03/07"), dt_entrega = DateTime.Parse("2017/03/16"), ds_observacao = "Tudo certo", fl_status = 0 });
             Save(new Entrega { ds_NFE = "35160903703339000142550000000594611002684151", id_ocorrencia = 1, dt_inclusao = DateTime.Parse("2017/03/08"), dt_entrega = DateTime.Parse("2017/03/18"), ds_observacao = "Tudo certo", fl_status = 0 });
             Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 2, dt_inclusao = DateTime.Parse("2017/03/13"), dt_entrega = DateTime.Parse("2017/03/21"), ds_observacao = "Tudo errado", fl_status = 1 });
