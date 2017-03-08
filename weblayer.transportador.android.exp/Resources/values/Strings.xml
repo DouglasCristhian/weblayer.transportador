@@ -11,11 +11,11 @@
   </string>
 
   <string name ="utilizandoApp_Introducao">
-    "       Este aplicativo tem por objetivo auxiliar às transportadoras no processo de informar as entregas de suas NFes. Através dele, é possível escanear o código de barras ou inseri-lo manualmente, definir o tipo da ocorrência, a data e hora desta e inclusive tirar uma foto do canhoto da nota. Ao fim deste processo, é ainda possível enviar um e-mail ao requisitante com as informações já formatadas."
+    "       Este aplicativo tem por objetivo auxiliar às transportadoras no processo de informar a realização das entregas. Com ele é possível coletar o código de barras da NFe, definir o tipo da ocorrência, a data e inclusive tirar uma foto do comprovante da entrega (canhoto). Ao fim do processo é possível compartilhar as informações através de email."
   </string>
 
   <string name ="utilizando_App1">
-    "       Na primeira tela do aplicativo, temos os registros de todas entregas já feitas pelo transportador. No momento de inicialização não temos nenhum registro e é possível adicionar um ao clicar no símbolo de adicionar no canto superior direito da tela."
+    "       Na primeira tela do aplicativo, temos os registros de todas entregas. No momento de inicialização não temos nenhum registro e é possível adicionar um ao clicar no símbolo de adicionar no canto superior direito da tela."
   </string>
 
   <string name ="utilizando_App2">
