@@ -48,6 +48,7 @@
     <Compile Include="DAL\Database.cs" />
     <Compile Include="DAL\EntregaRepository.cs" />
     <Compile Include="DAL\OcorrenciaRepository.cs" />
+    <Compile Include="DateHelper.cs" />
     <Compile Include="Model\Entrega.cs" />
     <Compile Include="Model\Ocorrencia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
