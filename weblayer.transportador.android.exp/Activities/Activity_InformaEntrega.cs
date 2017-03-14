@@ -1,25 +1,25 @@
-using System;
-using System.Collections.Generic;
+using Android;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
+using Android.Graphics;
 using Android.OS;
+using Android.Provider;
+using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
-using ZXing.Mobile;
-using weblayer.transportador.android.exp.Adapters;
-using weblayer.transportador.core.Model;
-using weblayer.transportador.core.DAL;
-using static Android.Widget.AdapterView;
-using weblayer.transportador.android.exp.Helpers;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
-using Android.Provider;
-using Android.Content.PM;
-using Android.Support.V4.App;
-using Android;
-using Android.Graphics;
 using System.IO;
-using JavaUri = Android.Net.Uri;
+using weblayer.transportador.android.exp.Adapters;
+using weblayer.transportador.android.exp.Helpers;
 using weblayer.transportador.core.BLL;
+using weblayer.transportador.core.DAL;
+using weblayer.transportador.core.Model;
+using ZXing.Mobile;
+using static Android.Widget.AdapterView;
+using JavaUri = Android.Net.Uri;
 
 namespace weblayer.transportador.android.exp.Activities
 {
@@ -123,9 +123,9 @@ namespace weblayer.transportador.android.exp.Activities
             }
             else
                 menu.RemoveItem(Resource.Id.action_adicionar);
-                menu.RemoveItem(Resource.Id.action_ajuda);
-                menu.RemoveItem(Resource.Id.action_sobre);
-                menu.RemoveItem(Resource.Id.action_sair);
+            menu.RemoveItem(Resource.Id.action_ajuda);
+            menu.RemoveItem(Resource.Id.action_sobre);
+            menu.RemoveItem(Resource.Id.action_sair);
 
             return base.OnCreateOptionsMenu(menu);
         }

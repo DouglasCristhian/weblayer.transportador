@@ -2274,19 +2274,13 @@ namespace weblayer.transportador.android.exp
 			public const int ic_launcher = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int ic_launcher2 = 2130903044;
+			public const int ic_launcherback = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int ic_launcher3 = 2130903045;
+			public const int ic_next = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int ic_launcherback = 2130903046;
-			
-			// aapt resource value: 0x7f030007
-			public const int ic_next = 2130903047;
-			
-			// aapt resource value: 0x7f030008
-			public const int ic_tune = 2130903048;
+			public const int ic_tune = 2130903046;
 			
 			static Mipmap()
 			{
