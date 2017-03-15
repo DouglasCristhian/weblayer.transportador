@@ -10,7 +10,6 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
-
   </style>
 
   <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
@@ -23,7 +22,7 @@
   <style name="PopupTheme" parent="android:Theme.Holo.Light">
     <item name="android:textColorPrimary">@android:color/black</item>
     <!-- Text Color dos items do Overflow menu-->
-    <!--<item name="android:background">@color/grey</item>-->
+    <item name="android:background">@color/grey</item>
   </style>
 
   <style name="SpinnerTheme" parent="android:Theme.Holo.Light">

@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using weblayer.transportador.android.exp.Adapters;
+using weblayer.transportador.android.exp.Fragments;
 using weblayer.transportador.android.exp.Helpers;
 using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.DAL;
@@ -42,7 +43,6 @@ namespace weblayer.transportador.android.exp.Activities
         private Button btnEscanearNF;
         private Button btnAnexarImagem;
         private Button btnEnviar;
-        private Button btnCancelar;
         private Button btnEnviarViaEmail;
         private ImageView imageView;
         private byte[] bytes;
@@ -120,12 +120,17 @@ namespace weblayer.transportador.android.exp.Activities
                 menu.RemoveItem(Resource.Id.action_ajuda);
                 menu.RemoveItem(Resource.Id.action_sobre);
                 menu.RemoveItem(Resource.Id.action_sair);
+                menu.RemoveItem(Resource.Id.action_filtrar);
             }
             else
+            {
                 menu.RemoveItem(Resource.Id.action_adicionar);
-            menu.RemoveItem(Resource.Id.action_ajuda);
-            menu.RemoveItem(Resource.Id.action_sobre);
-            menu.RemoveItem(Resource.Id.action_sair);
+                menu.RemoveItem(Resource.Id.action_ajuda);
+                menu.RemoveItem(Resource.Id.action_sobre);
+                menu.RemoveItem(Resource.Id.action_sair);
+                menu.RemoveItem(Resource.Id.action_filtrar);
+            }
+
 
             return base.OnCreateOptionsMenu(menu);
         }
@@ -240,6 +245,37 @@ namespace weblayer.transportador.android.exp.Activities
             btnEnviar.Click += BtnEnviar_Click;
             btnEnviarViaEmail.Click += BtnEnviarViaEmail_Click;
             txtCodigoNF.FocusChange += TxtCodigoNF_FocusChange;
+            imageView.Click += ImageView_Click;
+        }
+
+        private void ImageView_Click(object sender, EventArgs e)
+        {
+            if (entrega != null)
+            {
+                if (entrega.Image != null)
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.PutByteArray("imagem", entrega.Image);
+
+                    Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    FragmentImageView dialog = new FragmentImageView();
+                    dialog.Arguments = bundle;
+                    dialog.Show(transaction, "dialog");
+                }
+            }
+            else
+            {
+                if (bytes != null)
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.PutByteArray("imagem", bytes);
+
+                    Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    FragmentImageView dialog = new FragmentImageView();
+                    dialog.Arguments = bundle;
+                    dialog.Show(transaction, "dialog");
+                }
+            }
         }
 
         private void TxtCodigoNF_FocusChange(object sender, View.FocusChangeEventArgs e)
@@ -502,6 +538,8 @@ namespace weblayer.transportador.android.exp.Activities
 
                             System.IO.Stream stream = ContentResolver.OpenInputStream(contentUri);
                             imageView.SetImageBitmap(BitmapFactory.DecodeStream(stream));
+
+
                         }
                         else
                         {
@@ -517,6 +555,8 @@ namespace weblayer.transportador.android.exp.Activities
                 }
             }
         }
+
+
 
         public void SendByEmail()
         {
@@ -576,8 +616,6 @@ namespace weblayer.transportador.android.exp.Activities
             }
 
         }
-
-
 
         //SAVE E RESTORE
         private void Delete()

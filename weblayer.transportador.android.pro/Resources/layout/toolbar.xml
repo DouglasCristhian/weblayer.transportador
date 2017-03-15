@@ -11,7 +11,7 @@
   android:textSize="10dip"
   android:theme="@style/ToolbarTheme"
   app:popupTheme="@style/PopupTheme"
-  android:textAppearance="?android:attr/textAppearanceSmall">
+  app:titleTextAppearance="@style/TitleToolbar">
 
 </android.support.v7.widget.Toolbar>
 

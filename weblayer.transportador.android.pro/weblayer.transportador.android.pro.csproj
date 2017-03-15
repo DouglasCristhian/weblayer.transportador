@@ -111,6 +111,7 @@
     <Compile Include="Activities\Activity_Sobre.cs" />
     <Compile Include="Adapters\Adapter_EntregaListView.cs" />
     <Compile Include="Adapters\mySpinner.cs" />
+    <Compile Include="Fragments\Fragment_ImageView.cs" />
     <Compile Include="Fragments\Fragment_Legendas.cs" />
     <Compile Include="Fragments\GenericFragmentPagerAdaptor.cs" />
     <Compile Include="Fragments\GenericViewPagerFragment.cs" />
@@ -345,6 +346,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Fragment_ImageView.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

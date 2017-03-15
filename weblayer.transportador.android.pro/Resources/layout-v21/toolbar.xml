@@ -10,7 +10,7 @@
   android:elevation="3dp"
   app:theme="@style/ToolbarTheme"
   app:popupTheme="@style/PopupTheme"
-  android:textSize="2dip">
+  app:titleTextAppearance="@style/TitleToolbar">
 
 </android.support.v7.widget.Toolbar>
 <!--android:maxHeight="?attr/actionBarSize"-->
