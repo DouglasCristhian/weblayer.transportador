@@ -518,6 +518,8 @@ namespace weblayer.transportador.android.exp.Activities
         protected override void OnActivityResult(int requestCode, Android.App.Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
+
+            this.RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
             if (requestCode == 0)
             {
                 switch (resultCode)
@@ -538,8 +540,6 @@ namespace weblayer.transportador.android.exp.Activities
 
                             System.IO.Stream stream = ContentResolver.OpenInputStream(contentUri);
                             imageView.SetImageBitmap(BitmapFactory.DecodeStream(stream));
-
-
                         }
                         else
                         {

@@ -4,6 +4,7 @@ using Android.Graphics;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using UK.CO.Senab.Photoview;
 using weblayer.transportador.android.exp.Helpers;
 
 namespace weblayer.transportador.android.exp.Fragments
@@ -23,9 +24,14 @@ namespace weblayer.transportador.android.exp.Fragments
         {
             base.OnCreateView(inflater, container, savedInstanceState);
 
+            Activity.RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
+
             var view = inflater.Inflate(Resource.Layout.Fragment_ImageView, container, false);
             this.Dialog.SetCanceledOnTouchOutside(false);
             imgView = view.FindViewById<ImageView>(Resource.Id.img);
+
+            PhotoViewAttacher photoView = new PhotoViewAttacher(imgView);
+            photoView.Update();
 
             byte[] imgPassed = Arguments.GetByteArray("imagem");
 

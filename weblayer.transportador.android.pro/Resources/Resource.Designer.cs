@@ -1798,8 +1798,8 @@ namespace weblayer.transportador.android.pro
 			// aapt resource value: 0x7f0b007c
 			public const int action_image = 2131427452;
 			
-			// aapt resource value: 0x7f0b0099
-			public const int action_legenda = 2131427481;
+			// aapt resource value: 0x7f0b0098
+			public const int action_legenda = 2131427480;
 			
 			// aapt resource value: 0x7f0b0002
 			public const int action_menu_divider = 2131427330;
@@ -1816,11 +1816,11 @@ namespace weblayer.transportador.android.pro
 			// aapt resource value: 0x7f0b0026
 			public const int action_mode_close_button = 2131427366;
 			
-			// aapt resource value: 0x7f0b0097
-			public const int action_sair = 2131427479;
+			// aapt resource value: 0x7f0b0099
+			public const int action_sair = 2131427481;
 			
-			// aapt resource value: 0x7f0b0098
-			public const int action_sincronizar = 2131427480;
+			// aapt resource value: 0x7f0b0097
+			public const int action_sincronizar = 2131427479;
 			
 			// aapt resource value: 0x7f0b0096
 			public const int action_sobre = 2131427478;
