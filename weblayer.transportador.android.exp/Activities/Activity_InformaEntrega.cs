@@ -1,26 +1,26 @@
-using System;
-using System.Collections.Generic;
+using Android;
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
+using Android.Graphics;
 using Android.OS;
+using Android.Provider;
+using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
-using ZXing.Mobile;
-using weblayer.transportador.android.exp.Adapters;
-using weblayer.transportador.core.Model;
-using weblayer.transportador.core.DAL;
-using static Android.Widget.AdapterView;
-using weblayer.transportador.android.exp.Helpers;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
-using Android.Provider;
-using Android.Content.PM;
-using Android.Support.V4.App;
-using Android;
-using Android.Graphics;
 using System.IO;
-using Android.Views.Animations;
-using JavaUri = Android.Net.Uri;
+using weblayer.transportador.android.exp.Adapters;
+using weblayer.transportador.android.exp.Fragments;
+using weblayer.transportador.android.exp.Helpers;
 using weblayer.transportador.core.BLL;
+using weblayer.transportador.core.DAL;
+using weblayer.transportador.core.Model;
+using ZXing.Mobile;
+using static Android.Widget.AdapterView;
+using JavaUri = Android.Net.Uri;
 
 namespace weblayer.transportador.android.exp.Activities
 {
@@ -43,7 +43,6 @@ namespace weblayer.transportador.android.exp.Activities
         private Button btnEscanearNF;
         private Button btnAnexarImagem;
         private Button btnEnviar;
-        private Button btnCancelar;
         private Button btnEnviarViaEmail;
         private ImageView imageView;
         private byte[] bytes;
@@ -121,12 +120,17 @@ namespace weblayer.transportador.android.exp.Activities
                 menu.RemoveItem(Resource.Id.action_ajuda);
                 menu.RemoveItem(Resource.Id.action_sobre);
                 menu.RemoveItem(Resource.Id.action_sair);
+                menu.RemoveItem(Resource.Id.action_filtrar);
             }
             else
+            {
                 menu.RemoveItem(Resource.Id.action_adicionar);
                 menu.RemoveItem(Resource.Id.action_ajuda);
                 menu.RemoveItem(Resource.Id.action_sobre);
                 menu.RemoveItem(Resource.Id.action_sair);
+                menu.RemoveItem(Resource.Id.action_filtrar);
+            }
+
 
             return base.OnCreateOptionsMenu(menu);
         }
@@ -241,6 +245,37 @@ namespace weblayer.transportador.android.exp.Activities
             btnEnviar.Click += BtnEnviar_Click;
             btnEnviarViaEmail.Click += BtnEnviarViaEmail_Click;
             txtCodigoNF.FocusChange += TxtCodigoNF_FocusChange;
+            imageView.Click += ImageView_Click;
+        }
+
+        private void ImageView_Click(object sender, EventArgs e)
+        {
+            if (entrega != null)
+            {
+                if (entrega.Image != null)
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.PutByteArray("imagem", entrega.Image);
+
+                    Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    FragmentImageView dialog = new FragmentImageView();
+                    dialog.Arguments = bundle;
+                    dialog.Show(transaction, "dialog");
+                }
+            }
+            else
+            {
+                if (bytes != null)
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.PutByteArray("imagem", bytes);
+
+                    Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    FragmentImageView dialog = new FragmentImageView();
+                    dialog.Arguments = bundle;
+                    dialog.Show(transaction, "dialog");
+                }
+            }
         }
 
         private void TxtCodigoNF_FocusChange(object sender, View.FocusChangeEventArgs e)
@@ -286,55 +321,20 @@ namespace weblayer.transportador.android.exp.Activities
         private bool ValidateViews()
         {
             var validacao = true;
-
-            if (spinnerOcorrencia.SelectedItemPosition == 0)
-            {
-                validacao = false;
-                SetError("Por favor, selecione a ocorrência");
-                //((TextView)spinnerOcorrencia.GetChildAt(0)).Error = ("Por favor, selecione a ocorrência");
-                //Toast.MakeText(this, "Por favor, selecione a ocorrência", ToastLength.Short).Show();
-            }
-
-
             if (txtCodigoNF.Length() == 0 || txtCodigoNF.Length() < 44 || txtCodigoNF.Length() > 44)
             {
                 validacao = false;
                 txtCodigoNF.Error = "Código inválido! O código de barras deve ter 44 caracteres!";
-                txtCodigoNF.RequestFocus();
             }
 
-            
+            if (spinnerOcorrencia.SelectedItemPosition == 0)
+            {
+                validacao = false;
+                Toast.MakeText(this, "Por favor, selecione a ocorrência", ToastLength.Short).Show();
+            }
 
             //TODO: TERMINAR VALIDAÇÕES
             return validacao;
-        }
-
-        public void SetError(String errorMessage)
-        {
-            View view = spinnerOcorrencia.GetChildAt(spinnerOcorrencia.SelectedItemPosition);
-
-            // Set TextView in Secondary Unit spinner to be in error so that red (!) icon
-            // appears, and then shake control if in error
-            TextView tvListItem = (TextView)view;
-
-            // Set fake TextView to be in error so that the error message appears
-            TextView tvInvisibleError = FindViewById<TextView>(Resource.Id.tvInvisibleError);  
-
-            // Shake and set error if in error state, otherwise clear error
-            if (errorMessage != null)
-            {
-                tvListItem.Error = errorMessage;
-                tvInvisibleError.Error=errorMessage;
-
-                tvListItem.RequestFocus();
-                tvInvisibleError.RequestFocus();
-
-            }
-            else
-            {
-                tvListItem.Error = null;
-                tvInvisibleError.Error=null;
-            }
         }
 
         private void SpinnerOcorrencia_ItemSelected(object sender, ItemSelectedEventArgs e)
@@ -518,6 +518,8 @@ namespace weblayer.transportador.android.exp.Activities
         protected override void OnActivityResult(int requestCode, Android.App.Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
+
+            this.RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
             if (requestCode == 0)
             {
                 switch (resultCode)
@@ -553,6 +555,8 @@ namespace weblayer.transportador.android.exp.Activities
                 }
             }
         }
+
+
 
         public void SendByEmail()
         {
@@ -612,8 +616,6 @@ namespace weblayer.transportador.android.exp.Activities
             }
 
         }
-
-
 
         //SAVE E RESTORE
         private void Delete()

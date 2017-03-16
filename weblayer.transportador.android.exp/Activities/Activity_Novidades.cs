@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
@@ -49,10 +43,14 @@ namespace weblayer.transportador.android.exp.Activities
 
         private string Novidades()
         {
-            var Novidades = " 1.3 (10/02/2017):"
+            var Novidades = " 1.3 (15/03/2017):"
+            + "\n[Novo] Filtro de entregas por data de inclusão"
+            + "\n\n";
+
+            Novidades = Novidades + " 1.3 (10/02/2017):"
                 + "\n[Melhorias] Correções no texto de ajuda"
                 + "\n\n";
-            
+
             Novidades = Novidades + " 1.2 (23/01/2017):"
                 + "\n[Novo] Instruções de uso do aplicativo (Via menu 'Ajuda')"
                 + "\n[Melhorias] Atualização dos ícones do menu"
@@ -70,6 +68,7 @@ namespace weblayer.transportador.android.exp.Activities
             menu.RemoveItem(Resource.Id.action_ajuda);
             menu.RemoveItem(Resource.Id.action_sobre);
             menu.RemoveItem(Resource.Id.action_sair);
+            menu.RemoveItem(Resource.Id.action_filtrar);
 
             return base.OnCreateOptionsMenu(menu);
         }

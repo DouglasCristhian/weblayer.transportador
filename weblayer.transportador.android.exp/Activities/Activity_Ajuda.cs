@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Android.App;
-using Android.Widget;
 using Android.OS;
 using Android.Support.V4.View;
 using Android.Views;
-using weblayer.transportador.android.exp.Activities;
-using Android;
 using weblayer.transportador.android.exp.Fragments;
 
 namespace weblayer.transportador.android.exp.Activities
@@ -70,6 +65,7 @@ namespace weblayer.transportador.android.exp.Activities
             menu.RemoveItem(Resource.Id.action_ajuda);
             menu.RemoveItem(Resource.Id.action_sobre);
             menu.RemoveItem(Resource.Id.action_sair);
+            menu.RemoveItem(Resource.Id.action_filtrar);
 
             return base.OnCreateOptionsMenu(menu);
         }

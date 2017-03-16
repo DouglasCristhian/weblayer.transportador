@@ -1,28 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Content.PM;
-using weblayer.transportador.core.Model;
-using weblayer.transportador.core.BLL;
+using System.Collections.Generic;
 using weblayer.transportador.android.exp.Adapters;
+using weblayer.transportador.core.BLL;
+using weblayer.transportador.core.Model;
 
 namespace weblayer.transportador.android.exp.Activities
 {
-    [Activity(MainLauncher = true, ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
     public class Activity_Menu : Activity
     {
         ListView ListViewEntrega;
         List<Entrega> ListaEntregas;
         private TextView txtEntregas;
         Android.Support.V7.Widget.Toolbar toolbar;
+        private int dataEmissao;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,7 +32,7 @@ namespace weblayer.transportador.android.exp.Activities
 
             FindViews();
             BindData();
-            FillList();
+            FillList(dataEmissao);
 
             toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             toolbar.Title = " W/Transportador Express";
@@ -69,9 +65,9 @@ namespace weblayer.transportador.android.exp.Activities
             StartActivityForResult(intent, 0);
         }
 
-        private void FillList()
+        private void FillList(int dataEmissao)
         {
-            ListaEntregas = new EntregaManager().GetEntrega();
+            ListaEntregas = new EntregaManager().GetEntregaFiltro(dataEmissao);
             if (ListaEntregas.Count > 0)
             {
                 ListViewEntrega.Adapter = new Adapter_EntregaListView(this, ListaEntregas);
@@ -106,6 +102,11 @@ namespace weblayer.transportador.android.exp.Activities
                     StartActivityForResult(intent3, 0);
                     break;
 
+                case Resource.Id.action_filtrar:
+                    Intent intent4 = new Intent(this, typeof(Activity_FiltrarEntregas));
+                    StartActivityForResult(intent4, 0);
+                    break;
+
                 case Resource.Id.action_sair:
                     Finish();
                     break;
@@ -129,10 +130,12 @@ namespace weblayer.transportador.android.exp.Activities
 
             if (resultCode == Result.Ok)
             {
+                dataEmissao = data.GetIntExtra("DataEmissao", 0);
+                FillList(dataEmissao);
+
                 var mensagem = data.GetStringExtra("mensagem");
                 Toast.MakeText(this, mensagem, ToastLength.Short).Show();
 
-                FillList();
             }
         }
     }

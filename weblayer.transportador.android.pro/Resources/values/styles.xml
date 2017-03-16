@@ -22,12 +22,15 @@
 
   <style name="PopupTheme" parent="android:Theme.Holo.Light">
     <item name="android:textColorPrimary">@android:color/black</item>
-    <!-- Text Color dos items do Overflow menu-->
-    <!--<item name="android:background">@color/grey</item>-->
+    <item name="android:background">@color/grey</item>
   </style>
 
   <style name="SpinnerTheme" parent="android:Theme.Holo.Light">
     <!--<item name="android:background">@color/grey</item>-->
+  </style>
+
+  <style name="TitleToolbar" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <item name="android:textSize">16sp</item>
   </style>
 
 </resources>

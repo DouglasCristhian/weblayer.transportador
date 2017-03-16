@@ -49,6 +49,10 @@
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Data.Sqlite" />
     <Reference Include="mscorlib" />
+    <Reference Include="PhotoViewBinding, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.PhotoView.Android.1.2.4\lib\PhotoViewBinding.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -111,6 +115,7 @@
     <Compile Include="Activities\Activity_Sobre.cs" />
     <Compile Include="Adapters\Adapter_EntregaListView.cs" />
     <Compile Include="Adapters\mySpinner.cs" />
+    <Compile Include="Fragments\Fragment_ImageView.cs" />
     <Compile Include="Fragments\Fragment_Legendas.cs" />
     <Compile Include="Fragments\GenericFragmentPagerAdaptor.cs" />
     <Compile Include="Fragments\GenericViewPagerFragment.cs" />
@@ -123,6 +128,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
@@ -152,9 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ExcluirRegistros.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_launcher3.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ImagemAnexada.png" />
@@ -244,15 +247,6 @@
     <AndroidResource Include="Resources\mipmap-hdpi\ic_help.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\ic_launcherback.png" />
   </ItemGroup>
   <ItemGroup>
@@ -266,15 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-mdpi\ic_help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher3.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-mdpi\ic_launcherback.png" />
@@ -292,15 +277,6 @@
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_help.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcherback.png" />
   </ItemGroup>
   <ItemGroup>
@@ -316,15 +292,6 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_help.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher3.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcherback.png" />
   </ItemGroup>
   <ItemGroup>
@@ -338,15 +305,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_help.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher3.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcherback.png" />
@@ -377,6 +335,24 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Azul.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-hdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-mdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xhdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxhdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Fragment_ImageView.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

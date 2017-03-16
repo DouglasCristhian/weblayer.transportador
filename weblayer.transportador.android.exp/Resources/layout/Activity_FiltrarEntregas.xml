@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+    android:id="@+id/toolbar"
+    layout="@layout/toolbar"/>
+
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="18dip"
+      android:layout_marginBottom="18dip"
+      android:gravity="center_horizontal"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+      android:text="Data de Inclusão"/>
+
+    <Spinner
+       android:id="@+id/spinnerDataEmissao"
+       android:layout_height="wrap_content"
+       android:layout_width="match_parent"
+       android:layout_marginTop="3dp"
+       android:focusableInTouchMode="true"
+       android:layout_marginLeft = "18dip"
+       android:layout_marginRight = "18dip"
+       android:layout_marginBottom = "18dip"/>
+
+    <View
+      android:layout_width="fill_parent"
+      android:layout_height="3dp"
+      android:layout_marginTop="10dip"
+      android:background="#D6D7D7" />
+
+    <Button
+       android:id="@+id/btnApagarFiltros"
+       android:layout_marginTop="20dip"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center"
+       android:layout_width="wrap_content"
+       android:drawableLeft="@mipmap/ic_delete"
+       android:text="   Limpar Filtros"/>
+  </LinearLayout>
+</ScrollView>
