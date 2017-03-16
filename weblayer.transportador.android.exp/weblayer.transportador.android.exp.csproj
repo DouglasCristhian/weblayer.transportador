@@ -350,9 +350,6 @@
     <AndroidAsset Include="Assets\GoogleImage2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\weblayer.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\ic_tune.png" />
   </ItemGroup>
   <ItemGroup>
