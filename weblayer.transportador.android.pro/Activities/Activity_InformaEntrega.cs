@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Threading;
 using weblayer.transportador.android.pro.Adapters;
 using weblayer.transportador.android.pro.Fragments;
 using weblayer.transportador.android.pro.Helpers;
@@ -93,6 +94,7 @@ namespace weblayer.transportador.android.pro.Activities
                 spinnerOcorrencia.SetSelection(getIndexByValue(spinnerOcorrencia, entrega.id_ocorrencia));
 
         }
+
 
         //DEFININDO OBJETOS E EVENTOS
         private int getIndexByValue(Spinner spinner, long myId)
@@ -368,6 +370,7 @@ namespace weblayer.transportador.android.pro.Activities
             spinOcorrencia = spinnerOcorrencia.SelectedItem.ToString();
         }
 
+
         //EVENTOS CLICK
         private void BtnEnviarViaEmail_Click(object sender, EventArgs e)
         {
@@ -423,10 +426,19 @@ namespace weblayer.transportador.android.pro.Activities
 
         private async void BtnEscanearNF_Click(object sender, EventArgs e)
         {
-            scanner.UseCustomOverlay = false;
+            ZXing.Result result = null;
             scanner.TopText = "Aguarde o escaneamento do código de barras";
 
-            var result = await scanner.Scan();
+            new Thread(new ThreadStart(delegate
+            {
+                while (result == null)
+                {
+                    scanner.AutoFocus();
+                    Thread.Sleep(2000);
+                }
+            })).Start();
+
+            result = await scanner.Scan();
             HandleScanResult(result);
         }
 
@@ -450,6 +462,7 @@ namespace weblayer.transportador.android.pro.Activities
             intent.PutExtra(MediaStore.ExtraOutput, tempuri);
             StartActivityForResult(intent, 0);
         }
+
 
         //EVENTOS RESULTADOS
 
@@ -522,6 +535,12 @@ namespace weblayer.transportador.android.pro.Activities
 
         public void HandleScanResult(ZXing.Result result)
         {
+            if (result == null)
+            {
+                Toast.MakeText(this, "Ocorreu um erro durante o escaneamento. Por favor, tente novamente", ToastLength.Short).Show();
+                txtCodigoNF.Error = null;
+            }
+
             if (result != null && !string.IsNullOrEmpty(result.Text) && result.Text.Length == 44)
             {
                 txtCodigoNF.Text = result.Text;
@@ -529,13 +548,14 @@ namespace weblayer.transportador.android.pro.Activities
                 Substring_Helper sub = new Substring_Helper();
                 lblCNPJ.Text = "CNPJ Emissor: " + sub.Substring_CNPJ(result.Text.ToString());
                 lblNumeroNF.Text = "Número NF: " + sub.Substring_NumeroNF(result.Text.ToString()) + "/" + sub.Substring_SerieNota(result.Text.ToString());
+                txtCodigoNF.Error = null;
             }
             else
             {
                 txtCodigoNF.Error = "Código inválido! O código de barras deve ter 44 caracteres!";
                 lblCNPJ.Text = "CNPJ Emissor: ";
                 lblNumeroNF.Text = "Número NF: ";
-                //return;
+                txtCodigoNF.Text = "";
             }
 
         }
