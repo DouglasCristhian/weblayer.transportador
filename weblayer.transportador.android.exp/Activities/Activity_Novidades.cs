@@ -43,7 +43,7 @@ namespace weblayer.transportador.android.exp.Activities
 
         private string Novidades()
         {
-            var Novidades = " 1.3 (15/03/2017):"
+            var Novidades = " 1.4 (15/03/2017):"
             + "\n[Novo] Filtro de entregas por data de inclusão"
             + "\n\n";
 

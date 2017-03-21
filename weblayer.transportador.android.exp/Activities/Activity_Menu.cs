@@ -11,7 +11,7 @@ using weblayer.transportador.core.Model;
 
 namespace weblayer.transportador.android.exp.Activities
 {
-    [Activity(MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
     public class Activity_Menu : Activity
     {
         ListView ListViewEntrega;
@@ -26,6 +26,9 @@ namespace weblayer.transportador.android.exp.Activities
             SetContentView(Resource.Layout.Activity_Menu);
 
             core.DAL.Database.Initialize();
+
+
+            //Todo  Implemntar filtro par as ocorr ncias
 
             FindViews();
             BindData();

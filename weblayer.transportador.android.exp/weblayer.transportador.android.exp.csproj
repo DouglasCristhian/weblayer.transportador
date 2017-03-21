@@ -152,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -185,7 +184,9 @@
     <AndroidResource Include="Resources\layout\Fragment_UtilizandoApp.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Activity_InformaEntrega.xml" />
+    <AndroidResource Include="Resources\layout\Activity_InformaEntrega.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\SelecaoOcorrencia.png" />
@@ -348,9 +349,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\GoogleImage2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\weblayer.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\ic_tune.png" />

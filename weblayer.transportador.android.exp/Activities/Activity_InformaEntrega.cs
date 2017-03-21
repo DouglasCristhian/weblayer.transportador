@@ -25,7 +25,7 @@ using JavaUri = Android.Net.Uri;
 
 namespace weblayer.transportador.android.exp.Activities
 {
-    [Activity(Label = "Activity_InformaEntrega")]
+    [Activity]
     public class Activity_InformaEntrega : Activity_Base
     {
         Android.Support.V7.Widget.Toolbar toolbar;
@@ -172,7 +172,7 @@ namespace weblayer.transportador.android.exp.Activities
             scanner = new MobileBarcodeScanner();
 
             toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            this.Title = "Informar Entrega";
+            this.Title = "Informar Ocorrência";
             toolbar.MenuItemClick += Toolbar_MenuItemClick;
         }
 

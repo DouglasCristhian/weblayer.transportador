@@ -356,11 +356,13 @@ namespace weblayer.transportador.android.pro.Activities
 
             if (spinnerOcorrencia.SelectedItemPosition == 0)
             {
+                ((TextView)spinnerOcorrencia.GetChildAt(0)).Error = ("Por favor, selecione a ocorrência");
                 validacao = false;
                 Toast.MakeText(this, "Por favor, selecione a ocorrência", ToastLength.Short).Show();
             }
 
-            //TODO: TERMINAR VALIDAÇÕES
+            //TODO: TERMINAR VALIDAÇÕES - validar o díg. verificador da NFe
+
             return validacao;
         }
 
