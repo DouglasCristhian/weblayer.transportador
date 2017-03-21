@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
+using Android.Media;
 using Android.OS;
 using Android.Provider;
 using Android.Support.V4.App;
@@ -25,7 +26,7 @@ using JavaUri = Android.Net.Uri;
 
 namespace weblayer.transportador.android.exp.Activities
 {
-    [Activity]
+    [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
     public class Activity_InformaEntrega : Activity_Base
     {
         Android.Support.V7.Widget.Toolbar toolbar;
@@ -432,7 +433,8 @@ namespace weblayer.transportador.android.exp.Activities
         private void TirarFoto()
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
-            imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures), Java.Lang.String.ValueOf(count++) + ".jpeg");
+            imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
+                Java.Lang.String.ValueOf(count++) + ".jpeg");
             Android.Net.Uri tempuri = Android.Net.Uri.FromFile(imagefile);
             SaveForm();
             intent.PutExtra(MediaStore.ExtraOutput, tempuri);
@@ -561,6 +563,30 @@ namespace weblayer.transportador.android.exp.Activities
 
                             System.IO.Stream stream = ContentResolver.OpenInputStream(contentUri);
                             imageView.SetImageBitmap(BitmapFactory.DecodeStream(stream));
+
+                            BitmapFactory.Options options = new BitmapFactory.Options { InJustDecodeBounds = true };
+                            BitmapFactory.DecodeFile(contentUri.ToString(), options);
+                            //options.InJustDecodeBounds = false;
+
+                            Matrix mtx = new Matrix();
+                            ExifInterface exif = new ExifInterface(contentUri.ToString());
+                            string orientation = exif.GetAttribute(ExifInterface.TagOrientation);
+
+                            switch (orientation)
+                            {
+                                case "6":
+                                    mtx.PreRotate(90);
+                                    mtx.Dispose();
+                                    mtx = null;
+                                    break;
+                                case "1":
+                                    break;
+                                default:
+                                    mtx.PreRotate(90);
+                                    mtx.Dispose();
+                                    mtx = null;
+                                    break;
+                            }
                         }
                         else
                         {
