@@ -43,7 +43,12 @@ namespace weblayer.transportador.android.exp.Activities
 
         private string Novidades()
         {
-            var Novidades = " 1.4 (15/03/2017):"
+
+            var Novidades = " 1.5 (23/03/2017):"
+            + "\n[Melhoria] Implemetação do foco automático no scaneamento da NFe"
+            + "\n\n";
+
+            Novidades = Novidades  +  " 1.4 (15/03/2017):"
             + "\n[Novo] Filtro de entregas por data de inclusão"
             + "\n\n";
 
