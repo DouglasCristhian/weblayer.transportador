@@ -433,9 +433,18 @@ namespace weblayer.transportador.android.exp.Activities
         private void TirarFoto()
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
-            imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
-                Java.Lang.String.ValueOf(count++) + ".jpeg");
-            Android.Net.Uri tempuri = Android.Net.Uri.FromFile(imagefile);
+            //imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
+            //Java.Lang.String.ValueOf(count++) + ".jpeg");
+
+            var directory = new Java.IO.File(Android.OS.Environment.ExternalStorageDirectory, "W Transportador - Canhotos/").ToString();
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            imagefile = new Java.IO.File(directory + "/" + Java.Lang.String.ValueOf(count++) + ".jpeg");
+
+            JavaUri tempuri = JavaUri.FromFile(imagefile);
             SaveForm();
             intent.PutExtra(MediaStore.ExtraOutput, tempuri);
             StartActivityForResult(intent, 0);
@@ -603,8 +612,6 @@ namespace weblayer.transportador.android.exp.Activities
             }
         }
 
-
-
         public void SendByEmail()
         {
             var email = new Intent(Android.Content.Intent.ActionSend);
@@ -628,8 +635,7 @@ namespace weblayer.transportador.android.exp.Activities
                     mediaScanIntent.SetData(uri);
                     SendBroadcast(mediaScanIntent);
                 }
-
-                if (imagefile.Exists())
+                else if (imagefile.Exists())
                 {
                     ByteHelper helper = new ByteHelper();
                     bitmap = helper.ByteArrayToImage(entrega.Image);

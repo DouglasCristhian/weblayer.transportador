@@ -460,7 +460,7 @@ namespace weblayer.transportador.android.pro.Activities
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
             imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
-                Java.Lang.String.ValueOf(count++) + ".jpeg");
+                Java.Lang.String.ValueOf(count++) + ".png");
             Android.Net.Uri tempuri = Android.Net.Uri.FromFile(imagefile);
             SaveForm();
             intent.PutExtra(MediaStore.ExtraOutput, tempuri);
@@ -642,7 +642,7 @@ namespace weblayer.transportador.android.pro.Activities
                     bitmap = helper.ByteArrayToImage(entrega.Image);
 
                     var stream = new FileStream(imagefile.AbsolutePath, FileMode.Create);
-                    bitmap.Compress(Bitmap.CompressFormat.Jpeg, 50, stream);
+                    bitmap.Compress(Bitmap.CompressFormat.Png, 30, stream);
                     stream.Close();
 
                     Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
@@ -650,7 +650,7 @@ namespace weblayer.transportador.android.pro.Activities
                     mediaScanIntent.SetData(uri);
                     SendBroadcast(mediaScanIntent);
                 }
-
+                else
                 if (imagefile.Exists())
                 {
                     ByteHelper helper = new ByteHelper();
