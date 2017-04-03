@@ -18,7 +18,6 @@
     <item name="android:textColorSecondary">@android:color/black</item>
     <!--Color do Overflow Menu (Os três pontinhos)-->
   </style>
-
   <style name="PopupTheme" parent="android:Theme.Holo.Light">
     <item name="android:textColorPrimary">@android:color/black</item>
     <!-- Text Color dos items do Overflow menu-->
@@ -36,7 +35,7 @@
 
   <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
 
-    <item name="android:windowBackground">@drawable/SplashScreen</item>
+    <item name="android:windowBackground">@drawable/background</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowFullscreen">true</item>
   </style>

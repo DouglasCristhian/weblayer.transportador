@@ -1630,19 +1630,19 @@ namespace weblayer.transportador.android.exp
 			public const int abc_vector_test = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int btncamera = 2130837587;
+			public const int background = 2130837587;
 			
 			// aapt resource value: 0x7f020054
-			public const int EditTextStyle = 2130837588;
+			public const int btncamera = 2130837588;
 			
 			// aapt resource value: 0x7f020055
-			public const int EmailAndroidPronto = 2130837589;
+			public const int EditTextStyle = 2130837589;
 			
 			// aapt resource value: 0x7f020056
-			public const int ExcluirRegistros = 2130837590;
+			public const int EmailAndroidPronto = 2130837590;
 			
 			// aapt resource value: 0x7f020057
-			public const int ic_launcher3 = 2130837591;
+			public const int ExcluirRegistros = 2130837591;
 			
 			// aapt resource value: 0x7f020058
 			public const int Icon = 2130837592;
@@ -1677,11 +1677,11 @@ namespace weblayer.transportador.android.exp
 			// aapt resource value: 0x7f020062
 			public const int notification_icon_background = 2130837602;
 			
-			// aapt resource value: 0x7f020074
-			public const int notification_template_icon_bg = 2130837620;
+			// aapt resource value: 0x7f020070
+			public const int notification_template_icon_bg = 2130837616;
 			
-			// aapt resource value: 0x7f020075
-			public const int notification_template_icon_low_bg = 2130837621;
+			// aapt resource value: 0x7f020071
+			public const int notification_template_icon_low_bg = 2130837617;
 			
 			// aapt resource value: 0x7f020063
 			public const int notification_tile_bg = 2130837603;
@@ -1696,43 +1696,31 @@ namespace weblayer.transportador.android.exp
 			public const int PermissoesMidia = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int SelecaoData = 2130837607;
+			public const int sdgsdg = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int SelecaoHora = 2130837608;
+			public const int SelecaoData = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int SelecaoOcorrencia = 2130837609;
+			public const int SelecaoHora = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int SplashScreen = 2130837610;
+			public const int SelecaoOcorrencia = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int TelaPreenchimento1 = 2130837611;
+			public const int Splash = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int TelaPreenchimento2 = 2130837612;
+			public const int TelaPreenchimento1 = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int TelaPreenchimento3 = 2130837613;
+			public const int TelaPreenchimento2 = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int Transportadorlog = 2130837614;
+			public const int TelaPreenchimento3 = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int Transportadorlog2 = 2130837615;
-			
-			// aapt resource value: 0x7f020070
-			public const int Transportadorlogo_SemW = 2130837616;
-			
-			// aapt resource value: 0x7f020071
-			public const int VisualizarRegistros = 2130837617;
-			
-			// aapt resource value: 0x7f020072
-			public const int Weblayer_Logo = 2130837618;
-			
-			// aapt resource value: 0x7f020073
-			public const int WVendas_Logo = 2130837619;
+			public const int VisualizarRegistros = 2130837615;
 			
 			static Drawable()
 			{
