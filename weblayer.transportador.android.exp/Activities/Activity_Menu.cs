@@ -1,6 +1,5 @@
 using Android.App;
 using Android.Content;
-using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
@@ -11,7 +10,7 @@ using weblayer.transportador.core.Model;
 
 namespace weblayer.transportador.android.exp.Activities
 {
-    [Activity(MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
+    [Activity(MainLauncher = false, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
     public class Activity_Menu : Activity
     {
         ListView ListViewEntrega;
