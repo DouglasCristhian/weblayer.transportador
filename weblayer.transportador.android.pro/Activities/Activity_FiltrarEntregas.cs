@@ -4,11 +4,12 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
-using weblayer.transportador.android.exp.Adapters;
+using weblayer.transportador.android.pro.Activities;
+using weblayer.transportador.android.pro.Adapters;
 
-namespace weblayer.transportador.android.exp.Activities
+namespace weblayer.transportador.android.pro
 {
-    [Activity(MainLauncher = false, Label = "")]
+    [Activity(Label = "Filtro")]
     public class Activity_FiltrarEntregas : Activity_Base
     {
         public string MyPREFERENCES = "MyPrefs";
@@ -59,7 +60,8 @@ namespace weblayer.transportador.android.exp.Activities
 
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
-            MenuInflater.Inflate(Resource.Menu.menu_toolbar_Filtro, menu);
+            MenuInflater.Inflate(Resource.Menu.menu_toolbar_filtro, menu);
+            menu.RemoveItem(Resource.Id.action_filtrar);
             return base.OnCreateOptionsMenu(menu);
         }
 

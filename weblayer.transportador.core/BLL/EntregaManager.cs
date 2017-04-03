@@ -23,12 +23,12 @@ namespace weblayer.transportador.core.BLL
             var erros = "";
 
             if (obj.ds_NFE.Length < 5)
-                erros = erros + "\n O código da nota é inválido! Ele deve ter, no mínimo, 6 caracteres";
+                erros = erros + "\n O código da nota é inválido! Ele deve ter 44 caracteres";
 
             var Repository = new EntregaRepository();
             Repository.Save(obj);
 
-            mensagem = $"Entrega {obj.id} atualizada com sucesso";
+            mensagem = $"Ocorrência atualizada com sucesso";
         }
 
         public void Delete(Entrega obj)
@@ -36,7 +36,7 @@ namespace weblayer.transportador.core.BLL
             var Repository = new EntregaRepository();
             Repository.Delete(obj);
 
-            mensagem = $"Entrega {obj.id} excluída com sucesso";
+            mensagem = $"Ocorrência excluída com sucesso";
         }
     }
 }

@@ -3,6 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using System;
 using System.Collections.Generic;
 using weblayer.transportador.android.exp.Adapters;
 using weblayer.transportador.core.BLL;
@@ -50,6 +51,15 @@ namespace weblayer.transportador.android.exp.Activities
         private void BindData()
         {
             ListViewEntrega.ItemClick += ListViewEntrega_ItemClick;
+            ListViewEntrega.ItemLongClick += ListViewEntrega_ItemLongClick1;
+        }
+
+        private void ListViewEntrega_ItemLongClick1(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            var ListViewEntregaClick = sender as ListView;
+            var t = ListaEntregas[e.Position];
+
+            Delete(t);
         }
 
         private void ListViewEntrega_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -121,6 +131,41 @@ namespace weblayer.transportador.android.exp.Activities
                     return true;
             }
             return base.OnOptionsItemSelected(item);
+        }
+
+        private void Delete(Entrega ent)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.SetTitle("Tem certeza que deseja excluir esta ocorrência?");
+            alert.SetPositiveButton("Sim", (senderAlert, args) =>
+            {
+                try
+                {
+                    var entrega = new EntregaManager();
+                    entrega.Delete(ent);
+
+                    //Intent myIntent = new Intent(this, typeof(Activity_Menu));
+                    ////myIntent.PutExtra("mensagem", entrega.mensagem);
+                    //SetResult(Android.App.Result.Ok, myIntent);
+
+                    Toast.MakeText(this, entrega.mensagem, ToastLength.Short).Show();
+                    FillList(dataEmissao);
+                }
+                catch (Exception ex)
+                {
+                    Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+                }
+
+            });
+            alert.SetNegativeButton("Não", (senderAlert, args) =>
+            {
+            });
+
+            RunOnUiThread(() =>
+            {
+                alert.Show();
+            });
         }
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)

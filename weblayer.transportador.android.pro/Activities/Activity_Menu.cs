@@ -1,31 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using Android.Content.PM;
-using weblayer.transportador.core.Model;
-using weblayer.transportador.core.BLL;
-using weblayer.transportador.android.pro.Adapters;
+using System;
+using System.Collections.Generic;
 using System.Threading;
+using weblayer.transportador.android.pro.Adapters;
 using weblayer.transportador.android.pro.Fragments;
+using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.DAL;
+using weblayer.transportador.core.Model;
 
 namespace weblayer.transportador.android.pro.Activities
 {
-    [Activity(MainLauncher = true, ConfigurationChanges=Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
     public class Activity_Menu : Activity
     {
         ListView ListViewEntrega;
         List<Entrega> ListaEntregas;
         private TextView txtEntregas;
         Android.Support.V7.Widget.Toolbar toolbar;
+        private int dataEmissao;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -36,7 +33,7 @@ namespace weblayer.transportador.android.pro.Activities
 
             FindViews();
             BindData();
-            FillList();
+            FillList(dataEmissao);
 
             toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             toolbar.Title = " W/Transportador Professional";
@@ -55,6 +52,15 @@ namespace weblayer.transportador.android.pro.Activities
         private void BindData()
         {
             ListViewEntrega.ItemClick += ListViewEntrega_ItemClick;
+            ListViewEntrega.ItemLongClick += ListViewEntrega_ItemLongClick;
+        }
+
+        private void ListViewEntrega_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
+        {
+            var ListViewEntregaClick = sender as ListView;
+            var t = ListaEntregas[e.Position];
+
+            Delete(t);
         }
 
         private void ListViewEntrega_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
@@ -69,9 +75,9 @@ namespace weblayer.transportador.android.pro.Activities
             StartActivityForResult(intent, 0);
         }
 
-        private void FillList()
+        private void FillList(int dataEmissao)
         {
-            ListaEntregas = new EntregaManager().GetEntrega();
+            ListaEntregas = new EntregaManager().GetEntregaFiltro(dataEmissao);
             if (ListaEntregas.Count > 0)
             {
                 ListViewEntrega.Adapter = new Adapter_EntregaListView(this, ListaEntregas);
@@ -90,6 +96,11 @@ namespace weblayer.transportador.android.pro.Activities
         {
             switch (e.Item.ItemId)
             {
+                case Resource.Id.action_filtrar:
+                    Intent intent0 = new Intent(this, typeof(Activity_FiltrarEntregas));
+                    StartActivityForResult(intent0, 0);
+                    break;
+
                 case Resource.Id.action_adicionar:
                     Intent intent = new Intent(this, typeof(Activity_InformaEntrega));
                     StartActivityForResult(intent, 0);
@@ -118,7 +129,7 @@ namespace weblayer.transportador.android.pro.Activities
                         System.Threading.Thread.Sleep(1000);
                         RunOnUiThread(() => SincronizarTeste());
                         //LOAD METHOD TO GET ACCOUNT INFO
-                       RunOnUiThread(() => Toast.MakeText(this, "Sincronizado com sucesso!", ToastLength.Short).Show());
+                        RunOnUiThread(() => Toast.MakeText(this, "Sincronizado com sucesso!", ToastLength.Short).Show());
 
                         //HIDE PROGRESS DIALOG
                         RunOnUiThread(() => progressDialog.Hide());
@@ -142,7 +153,7 @@ namespace weblayer.transportador.android.pro.Activities
                 item.fl_status = 1;
                 rep.Save(item);
 
-                FillList();
+                FillList(dataEmissao);
             }
 
         }
@@ -158,16 +169,49 @@ namespace weblayer.transportador.android.pro.Activities
             return base.OnOptionsItemSelected(item);
         }
 
+        private void Delete(Entrega ent)
+        {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+            alert.SetTitle("Tem certeza que deseja excluir esta ocorrência?");
+            alert.SetPositiveButton("Sim", (senderAlert, args) =>
+            {
+                try
+                {
+                    var entrega = new EntregaManager();
+                    entrega.Delete(ent);
+
+                    Toast.MakeText(this, entrega.mensagem, ToastLength.Short).Show();
+                    FillList(dataEmissao);
+                }
+                catch (Exception ex)
+                {
+                    Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+                }
+
+            });
+            alert.SetNegativeButton("Não", (senderAlert, args) =>
+            {
+            });
+
+            RunOnUiThread(() =>
+            {
+                alert.Show();
+            });
+        }
+
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
             if (resultCode == Result.Ok)
             {
+                dataEmissao = data.GetIntExtra("DataEmissao", 0);
+                FillList(dataEmissao);
+
                 var mensagem = data.GetStringExtra("mensagem");
                 Toast.MakeText(this, mensagem, ToastLength.Short).Show();
 
-                FillList();
             }
         }
     }

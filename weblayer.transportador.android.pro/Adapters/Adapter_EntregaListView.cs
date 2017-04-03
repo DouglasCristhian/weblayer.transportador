@@ -1,17 +1,15 @@
-using System.Collections.Generic;
-using System.Linq;
-
 using Android.App;
 using Android.Content;
 using Android.Views;
-using weblayer.transportador.core.Model;
 using Android.Widget;
+using System.Collections.Generic;
+using weblayer.transportador.core.Model;
 
 namespace weblayer.transportador.android.pro.Adapters
 {
     [Activity(Label = "Adapter_EntregaListView")]
     public class Adapter_EntregaListView : BaseAdapter<Entrega>
-    { 
+    {
         public List<Entrega> mItems;
         public Context mContext;
         private string descricaoocorrencia;
@@ -61,7 +59,7 @@ namespace weblayer.transportador.android.pro.Adapters
                 descricaoocorrencia = "DEVOLUÇÃO";
 
             row.FindViewById<TextView>(Resource.Id.ds_NFE).Text = "NFe: " + mItems[position].ds_NFE;
-            row.FindViewById<TextView>(Resource.Id.id_ocorrencia).Text = "Ocorrencia: " + descricaoocorrencia;
+            row.FindViewById<TextView>(Resource.Id.id_ocorrencia).Text = "Ocorrência: " + descricaoocorrencia;
             row.FindViewById<TextView>(Resource.Id.dt_inclusao).Text = "Data de Inclusão: " + mItems[position].dt_inclusao.Value.ToString("dd/MM/yyyy HH:mm");
             row.FindViewById<TextView>(Resource.Id.dt_entrega).Text = "Data de Entrega: " + mItems[position].dt_entrega.Value.ToString("dd/MM/yyyy HH:mm");
 

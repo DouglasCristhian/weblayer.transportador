@@ -193,33 +193,30 @@
        android:paddingRight="30dip"
        android:id="@+id/btnAnexarImagem" />
 
+    <Button
+      android:text= "Salvar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginRight = "18dip"
+      android:layout_marginLeft = "18dip"
+      android:paddingLeft="30dip"
+      android:paddingRight="30dip"
+      android:id="@+id/btnSalvar"/>
+
     <!--Botão salvar + enviar-->
     <Button
-       android:text= "Salvar e Enviar"
+       android:text= "Salvar e Compartilhar"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_marginTop="10dip"
        android:layout_marginRight = "18dip"
        android:layout_marginLeft = "18dip"
        android:paddingLeft="30dip"
        android:paddingRight="30dip"
        android:id="@+id/btnEnviar"/>
 
-    <!--Botão cancelar-->
-    <!--<Button
-       android:text= "Cancelar"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginTop="10dip"
-       android:layout_marginRight = "18dip"
-       android:layout_marginLeft = "18dip"
-       android:paddingLeft="30dip"
-       android:paddingRight="30dip"
-       android:id="@+id/btnCancelar"/>-->
-
     <!--Botão enviar por email-->
     <Button
-      android:text= "Enviar via e-mail"
+      android:text= "Compartilhar via e-mail"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="10dip"

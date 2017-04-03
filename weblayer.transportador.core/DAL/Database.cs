@@ -1,5 +1,5 @@
-using System;
 using SQLite;
+using System;
 using weblayer.transportador.core.Model;
 
 namespace weblayer.transportador.core.DAL

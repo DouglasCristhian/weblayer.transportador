@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using System.Collections.Generic;
 
 namespace weblayer.transportador.android.pro.Activities
 {
@@ -71,6 +65,7 @@ namespace weblayer.transportador.android.pro.Activities
             menu.RemoveItem(Resource.Id.action_sair);
             menu.RemoveItem(Resource.Id.action_sincronizar);
             menu.RemoveItem(Resource.Id.action_legenda);
+            menu.RemoveItem(Resource.Id.action_filtrar);
 
             return base.OnCreateOptionsMenu(menu);
         }

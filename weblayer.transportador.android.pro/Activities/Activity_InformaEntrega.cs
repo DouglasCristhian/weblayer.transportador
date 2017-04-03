@@ -46,6 +46,7 @@ namespace weblayer.transportador.android.pro.Activities
         private TextView txtStatus;
         private Button btnEscanearNF;
         private Button btnAnexarImagem;
+        private Button btnSalvar;
         private Button btnEnviar;
         private Button btnEnviarViaEmail;
         private ImageView imageView;
@@ -117,6 +118,7 @@ namespace weblayer.transportador.android.pro.Activities
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_toolbar, menu);
+            menu.RemoveItem(Resource.Id.action_filtrar);
 
             if (operacao != "selecionado")
             {
@@ -158,6 +160,7 @@ namespace weblayer.transportador.android.pro.Activities
             lblCNPJ = FindViewById<TextView>(Resource.Id.lblCNPJ);
             lblNumeroNF = FindViewById<TextView>(Resource.Id.lblNumeroNF);
             btnAnexarImagem = FindViewById<Button>(Resource.Id.btnAnexarImagem);
+            btnSalvar = FindViewById<Button>(Resource.Id.btnSalvar);
             btnEscanearNF = FindViewById<Button>(Resource.Id.btnEscanearNF);
             btnEnviar = FindViewById<Button>(Resource.Id.btnEnviar);
             btnEnviarViaEmail = FindViewById<Button>(Resource.Id.btnEnviarViaEmail);
@@ -174,6 +177,7 @@ namespace weblayer.transportador.android.pro.Activities
                 btnEscanearNF.Visibility = ViewStates.Gone;
                 btnAnexarImagem.Visibility = ViewStates.Gone;
                 btnEnviar.Visibility = ViewStates.Gone;
+                btnSalvar.Visibility = ViewStates.Gone;
             }
 
 
@@ -271,6 +275,7 @@ namespace weblayer.transportador.android.pro.Activities
             btnEscanearNF.Click += BtnEscanearNF_Click;
             btnAnexarImagem.Click += ValidarPermissoes;
             btnEnviar.Click += BtnEnviar_Click;
+            btnSalvar.Click += BtnSalvar_Click;
             btnEnviarViaEmail.Click += BtnEnviarViaEmail_Click;
             txtCodigoNF.FocusChange += TxtCodigoNF_FocusChange;
             imageView.Click += ImageView_Click;
@@ -381,15 +386,17 @@ namespace weblayer.transportador.android.pro.Activities
             SendByEmail();
         }
 
+        private void BtnSalvar_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
         private void BtnEnviar_Click(object sender, EventArgs e)
         {
             //Enviar no momento da inserção
             Save();
-        }
-
-        private void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            Finish();
+            if (ValidateViews())
+                SendByEmail();
         }
 
         private void TxtDataEntrega_Click(object sender, EventArgs e)
@@ -458,10 +465,27 @@ namespace weblayer.transportador.android.pro.Activities
 
         private void TirarFoto()
         {
+            //Intent intent = new Intent(MediaStore.ActionImageCapture);
+            //imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
+            //    Java.Lang.String.ValueOf(count++) + ".png");
+            //Android.Net.Uri tempuri = Android.Net.Uri.FromFile(imagefile);
+            //SaveForm();
+            //intent.PutExtra(MediaStore.ExtraOutput, tempuri);
+            //StartActivityForResult(intent, 0);
+
             Intent intent = new Intent(MediaStore.ActionImageCapture);
-            imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
-                Java.Lang.String.ValueOf(count++) + ".png");
-            Android.Net.Uri tempuri = Android.Net.Uri.FromFile(imagefile);
+            //imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
+            //Java.Lang.String.ValueOf(count++) + ".jpeg");
+
+            var directory = new Java.IO.File(Android.OS.Environment.ExternalStorageDirectory, "W Transportador Pro - Canhotos/").ToString();
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            imagefile = new Java.IO.File(directory + "/" + Java.Lang.String.ValueOf(count++) + ".jpeg");
+
+            JavaUri tempuri = JavaUri.FromFile(imagefile);
             SaveForm();
             intent.PutExtra(MediaStore.ExtraOutput, tempuri);
             StartActivityForResult(intent, 0);
@@ -740,7 +764,7 @@ namespace weblayer.transportador.android.pro.Activities
                 myIntent.PutExtra("mensagem", Ent.mensagem);
                 SetResult(Result.Ok, myIntent);
 
-                SendByEmail();
+                //SendByEmail();
 
                 Finish();
             }

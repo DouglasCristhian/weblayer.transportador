@@ -43,6 +43,7 @@ namespace weblayer.transportador.android.exp.Activities
         private TextView txtHoraEntrega;
         private TextView lblObservacao;
         private Button btnEscanearNF;
+        private Button btnSalvar;
         private Button btnAnexarImagem;
         private Button btnEnviar;
         private Button btnEnviarViaEmail;
@@ -93,7 +94,6 @@ namespace weblayer.transportador.android.exp.Activities
                 spinnerOcorrencia.SetSelection(getIndexByValue(spinnerOcorrencia, entrega.id_ocorrencia));
 
         }
-
 
         //DEFININDO OBJETOS E EVENTOS
         private int getIndexByValue(Spinner spinner, long myId)
@@ -151,6 +151,7 @@ namespace weblayer.transportador.android.exp.Activities
             lblNumeroNF = FindViewById<TextView>(Resource.Id.lblNumeroNF);
             btnAnexarImagem = FindViewById<Button>(Resource.Id.btnAnexarImagem);
             btnEscanearNF = FindViewById<Button>(Resource.Id.btnEscanearNF);
+            btnSalvar = FindViewById<Button>(Resource.Id.btnSalvar);
             btnEnviar = FindViewById<Button>(Resource.Id.btnEnviar);
             btnEnviarViaEmail = FindViewById<Button>(Resource.Id.btnEnviarViaEmail);
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
@@ -164,8 +165,8 @@ namespace weblayer.transportador.android.exp.Activities
                 btnEscanearNF.Visibility = ViewStates.Gone;
                 btnAnexarImagem.Visibility = ViewStates.Gone;
                 btnEnviar.Visibility = ViewStates.Gone;
+                btnSalvar.Visibility = ViewStates.Gone;
             }
-
 
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
 
@@ -246,6 +247,7 @@ namespace weblayer.transportador.android.exp.Activities
             btnEscanearNF.Click += BtnEscanearNF_Click;
             btnAnexarImagem.Click += ValidarPermissoes;
             btnEnviar.Click += BtnEnviar_Click;
+            btnSalvar.Click += BtnSalvar_Click;
             btnEnviarViaEmail.Click += BtnEnviarViaEmail_Click;
             txtCodigoNF.FocusChange += TxtCodigoNF_FocusChange;
             imageView.Click += ImageView_Click;
@@ -346,7 +348,6 @@ namespace weblayer.transportador.android.exp.Activities
             spinOcorrencia = spinnerOcorrencia.SelectedItem.ToString();
         }
 
-
         //EVENTOS CLICK
         private void BtnEnviarViaEmail_Click(object sender, EventArgs e)
         {
@@ -357,6 +358,13 @@ namespace weblayer.transportador.android.exp.Activities
         private void BtnEnviar_Click(object sender, EventArgs e)
         {
             //Enviar no momento da inserção
+            Save();
+            if (ValidateViews())
+                SendByEmail();
+        }
+
+        private void BtnSalvar_Click(object sender, EventArgs e)
+        {
             Save();
         }
 
@@ -718,8 +726,7 @@ namespace weblayer.transportador.android.exp.Activities
                 Intent myIntent = new Intent(this, typeof(Activity_Menu));
                 myIntent.PutExtra("mensagem", Ent.mensagem);
                 SetResult(Result.Ok, myIntent);
-
-                SendByEmail();
+                //SendByEmail();
 
                 Finish();
             }

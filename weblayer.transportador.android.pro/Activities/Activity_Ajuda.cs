@@ -69,6 +69,7 @@ namespace weblayer.transportador.android.pro.Activities
             menu.RemoveItem(Resource.Id.action_sair);
             menu.RemoveItem(Resource.Id.action_sincronizar);
             menu.RemoveItem(Resource.Id.action_legenda);
+            menu.RemoveItem(Resource.Id.action_filtrar);
 
             return base.OnCreateOptionsMenu(menu);
         }
