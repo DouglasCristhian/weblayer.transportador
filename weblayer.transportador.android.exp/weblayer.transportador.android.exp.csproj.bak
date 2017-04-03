@@ -137,7 +137,6 @@
     <Compile Include="Activities\Activity_Menu.cs" />
     <Compile Include="Activities\Activity_Novidades.cs" />
     <Compile Include="Activities\Activity_Sobre.cs" />
-    <Compile Include="Activities\Activity_SplashIntro.cs" />
     <Compile Include="Adapters\Adapter_EntregaListView.cs" />
     <Compile Include="Adapters\mySpinner.cs" />
     <Compile Include="Fragments\FragmentImageView.cs" />
@@ -173,9 +172,7 @@
     <AndroidResource Include="Resources\layout\Adapter_Entrega_ListView.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Activity_Menu.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Activity_Menu.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Activity_SobreWeblayer.xml" />
@@ -204,7 +201,22 @@
     <AndroidResource Include="Resources\drawable\TelaPreenchimento3.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Transportadorlog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Transportadorlog2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Transportadorlogo_SemW.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\VisualizarRegistros.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Weblayer_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\WVendas_Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\btncamera.png" />
@@ -243,9 +255,7 @@
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\styles.xml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Activity_ManualUsuario.xml" />
@@ -329,6 +339,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_next.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_launcher3.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidAsset Include="Assets\Embarcador_Logo512x512.png" />
   </ItemGroup>
   <ItemGroup>
@@ -378,45 +391,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Fragment_ImageView.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\Splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\Splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\Splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\Splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\Splash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\sdgsdg.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

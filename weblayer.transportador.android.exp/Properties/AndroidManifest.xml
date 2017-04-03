@@ -4,5 +4,5 @@
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<application android:label="W/Transportador Exp" android:theme="@style/MaterialTheme" android:largeHeap="true" android:hardwareAccelerated="false" android:icon="@mipmap/ic_launcher"></application>
+	<application android:label="W/Transportador Exp" android:theme="@style/MaterialTheme" android:largeHeap="true" android:hardwareAccelerated="false" android:icon="@drawable/Icon"></application>
 </manifest>
