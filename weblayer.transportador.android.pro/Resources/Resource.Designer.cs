@@ -1648,19 +1648,19 @@ namespace weblayer.transportador.android.pro
 			public const int EditTextStyle = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int EmailAndroidPronto = 2130837593;
+			public const int emailandroidpronto = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int ExcluirRegistros = 2130837594;
+			public const int excluirregistros = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int Icon = 2130837595;
+			public const int icon = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int ImagemAnexada = 2130837596;
+			public const int imagemanexada = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int Menu = 2130837597;
+			public const int menu = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
 			public const int notification_action_background = 2130837598;
@@ -1699,37 +1699,37 @@ namespace weblayer.transportador.android.pro
 			public const int notify_panel_notification_icon_bg = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int PermissoesCamera = 2130837608;
+			public const int permissoescamera = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int PermissoesMidia = 2130837609;
+			public const int permissoesmidia = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int SelecaoData = 2130837610;
+			public const int selecaodata = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
-			public const int SelecaoHora = 2130837611;
+			public const int selecaohora = 2130837611;
 			
 			// aapt resource value: 0x7f02006c
-			public const int SelecaoOcorrencia = 2130837612;
+			public const int selecaoocorrencia = 2130837612;
 			
 			// aapt resource value: 0x7f02006d
-			public const int TelaPreenchimento1 = 2130837613;
+			public const int telapreenchimento1 = 2130837613;
 			
 			// aapt resource value: 0x7f02006e
-			public const int TelaPreenchimento2 = 2130837614;
+			public const int telapreenchimento2 = 2130837614;
 			
 			// aapt resource value: 0x7f02006f
-			public const int TelaPreenchimento3 = 2130837615;
+			public const int telapreenchimento3 = 2130837615;
 			
 			// aapt resource value: 0x7f020070
-			public const int VisualizarRegistros = 2130837616;
+			public const int visualizarregistros = 2130837616;
 			
 			// aapt resource value: 0x7f020071
-			public const int Weblayer_Logo = 2130837617;
+			public const int weblayer_logo = 2130837617;
 			
 			// aapt resource value: 0x7f020072
-			public const int WVendas_Logo = 2130837618;
+			public const int wvendas_logo = 2130837618;
 			
 			static Drawable()
 			{

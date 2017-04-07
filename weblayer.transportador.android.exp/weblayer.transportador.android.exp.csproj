@@ -96,6 +96,10 @@
       <HintPath>..\packages\Xamarin.Android.Support.Core.Utils.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Core.Utils.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.Design, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.Design.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Design.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Android.Support.Fragment, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.Fragment.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Fragment.dll</HintPath>
       <Private>True</Private>
@@ -104,12 +108,20 @@
       <HintPath>..\packages\Xamarin.Android.Support.Media.Compat.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Media.Compat.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.Transition, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.Transition.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Transition.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.v4.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.v4.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -130,35 +142,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\Activity_Ajuda.cs" />
-    <Compile Include="Activities\Activity_Base.cs" />
-    <Compile Include="Activities\Activity_FiltrarEntregas.cs" />
-    <Compile Include="Activities\Activity_InformaEntrega.cs" />
-    <Compile Include="Activities\Activity_Menu.cs" />
-    <Compile Include="Activities\Activity_Novidades.cs" />
-    <Compile Include="Activities\Activity_Sobre.cs" />
-    <Compile Include="Activities\Activity_SplashIntro.cs" />
+    <Compile Include="Activities\Geolocalizacao\Activity_Geolocalizacao.cs" />
+    <Compile Include="Activities\Menu\Activity_Base.cs" />
+    <Compile Include="Activities\Entrega\Activity_FiltrarEntregas.cs" />
+    <Compile Include="Activities\Entrega\Activity_InformaEntrega.cs" />
+    <Compile Include="Activities\Menu\Activity_Menu.cs" />
+    <Compile Include="Activities\Menu\Activity_Novidades.cs" />
+    <Compile Include="Activities\Menu\Activity_Sobre.cs" />
+    <Compile Include="Activities\Menu\Activity_SplashIntro.cs" />
+    <Compile Include="Activities\Menu\Activity_WebView.cs" />
     <Compile Include="Adapters\Adapter_EntregaListView.cs" />
     <Compile Include="Adapters\mySpinner.cs" />
     <Compile Include="Fragments\FragmentImageView.cs" />
-    <Compile Include="Fragments\GenericFragmentPagerAdaptor.cs" />
-    <Compile Include="Fragments\GenericViewPagerFragment.cs" />
+    <Compile Include="Fragments\Fragment_Geolocalizacao.cs" />
     <Compile Include="Helpers\ByteHelper.cs" />
     <Compile Include="Helpers\DatePicker_Helper.cs" />
+    <Compile Include="Helpers\DialogEventArgs.cs" />
     <Compile Include="Helpers\Mask.cs" />
     <Compile Include="Helpers\Substring_Helper.cs" />
     <Compile Include="Helpers\TimePicker_Helper.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ARLocationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -184,54 +195,9 @@
     <AndroidResource Include="Resources\layout\Activity_Novidades.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Fragment_UtilizandoApp.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\layout\Activity_InformaEntrega.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SelecaoOcorrencia.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TelaPreenchimento1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TelaPreenchimento2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TelaPreenchimento3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\VisualizarRegistros.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\btncamera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\EmailAndroidPronto.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ExcluirRegistros.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ImagemAnexada.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\PermissoesCamera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\PermissoesMidia.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SelecaoData.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SelecaoHora.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\toolbar.xml" />
@@ -418,6 +384,15 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-ldpi\background.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Activity_WebView.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Fragment_Geolocalizacao.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -434,6 +409,9 @@
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Vector.Drawable.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Vector.Drawable.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.v7.AppCompat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.v7.AppCompat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Transition.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Transition.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Transition.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Transition.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Support.v7.RecyclerView.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.RecyclerView.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.v7.RecyclerView.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.RecyclerView.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Design.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Design.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Build.Download.0.4.2\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.2\build\Xamarin.Build.Download.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Compat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Compat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Compat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Compat.targets')" />
@@ -445,6 +423,9 @@
   <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Vector.Drawable.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.AppCompat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.AppCompat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Transition.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Transition.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Transition.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Transition.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v7.RecyclerView.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.RecyclerView.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.RecyclerView.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.RecyclerView.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.Design.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Design.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.
 		<Target Name="BeforeBuild">

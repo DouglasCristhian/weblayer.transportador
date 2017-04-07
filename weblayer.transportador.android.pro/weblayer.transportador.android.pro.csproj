@@ -118,8 +118,6 @@
     <Compile Include="Adapters\mySpinner.cs" />
     <Compile Include="Fragments\Fragment_ImageView.cs" />
     <Compile Include="Fragments\Fragment_Legendas.cs" />
-    <Compile Include="Fragments\GenericFragmentPagerAdaptor.cs" />
-    <Compile Include="Fragments\GenericViewPagerFragment.cs" />
     <Compile Include="Helpers\ByteHelper.cs" />
     <Compile Include="Helpers\DatePicker_Helper.cs" />
     <Compile Include="Helpers\Mask.cs" />
@@ -141,58 +139,7 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\btncamera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\EmailAndroidPronto.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ExcluirRegistros.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ImagemAnexada.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Menu.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\PermissoesCamera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\PermissoesMidia.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SelecaoData.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SelecaoHora.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\SelecaoOcorrencia.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TelaPreenchimento1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TelaPreenchimento2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TelaPreenchimento3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\VisualizarRegistros.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Weblayer_Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\WVendas_Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Activity_InformaEntrega.xml" />
@@ -211,9 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Adapter_Entrega_ListView.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\layout\Fragment_UtilizandoApp.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\toolbar.xml" />

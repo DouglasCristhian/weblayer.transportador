@@ -40,6 +40,10 @@ namespace weblayer.transportador.core.Model
         public virtual string ds_observacao
         { get; set; }
 
+        [MaxLength(200)]
+        public virtual string ds_geolocalizacao
+        { get; set; }
+
         public byte[] Image { get; set; }
 
         [MaxLength(400)]

@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
+using Android.Locations;
 using Android.Media;
 using Android.OS;
 using Android.Provider;
@@ -29,6 +30,7 @@ namespace weblayer.transportador.android.exp.Activities
     [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
     public class Activity_InformaEntrega : Activity_Base
     {
+        #region variaveis
         Android.Support.V7.Widget.Toolbar toolbar;
         public static string MyPREFERENCES = "MyPrefs";
         MobileBarcodeScanner scanner;
@@ -38,16 +40,19 @@ namespace weblayer.transportador.android.exp.Activities
         private EditText txtCodigoNF;
         private TextView lblCNPJ;
         private TextView lblNumeroNF;
+        private EditText txtGeolocalizacao;
         private EditText txtObservacao;
         private TextView txtDataEntrega;
         private TextView txtHoraEntrega;
         private TextView lblObservacao;
+        private TextView lblGeolocalizacao;
         private Button btnEscanearNF;
         private Button btnSalvar;
         private Button btnAnexarImagem;
         private Button btnEnviar;
         private Button btnEnviarViaEmail;
         private ImageView imageView;
+        private CheckBox checkBoxGeolocalizacao;
         private byte[] bytes;
         private Android.Graphics.Bitmap bitmap;
         private Entrega entrega;
@@ -58,6 +63,11 @@ namespace weblayer.transportador.android.exp.Activities
         Android.Net.Uri contentUri;
         private bool camcheck;
         private bool lercheck;
+        Location currentLocation;
+        LocationManager locationManager;
+        string localizacao;
+        string locationProvider;
+        #endregion variaveis
 
         protected override int LayoutResource
         {
@@ -140,6 +150,8 @@ namespace weblayer.transportador.android.exp.Activities
 
         private void FindViews()
         {
+            #region FindViewsById
+            lblGeolocalizacao = FindViewById<TextView>(Resource.Id.lblGeolocalizacao);
             txtCodigoNF = FindViewById<EditText>(Resource.Id.txtCodigoNF);
             spinnerOcorrencia = FindViewById<Spinner>(Resource.Id.spinnerOcorrencia);
             spinnerOcorrencia.ItemSelected += new EventHandler<ItemSelectedEventArgs>(SpinnerOcorrencia_ItemSelected);
@@ -155,6 +167,12 @@ namespace weblayer.transportador.android.exp.Activities
             btnEnviar = FindViewById<Button>(Resource.Id.btnEnviar);
             btnEnviarViaEmail = FindViewById<Button>(Resource.Id.btnEnviarViaEmail);
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
+            checkBoxGeolocalizacao = FindViewById<CheckBox>(Resource.Id.checkBoxGeolocalizacao);
+            txtGeolocalizacao = FindViewById<EditText>(Resource.Id.txtGeolocalizacao);
+            #endregion
+
+            //txtGeolocalizacao.Visibility = ViewStates.Gone;
+            lblGeolocalizacao.Visibility = ViewStates.Gone;
 
             if (operacao == "selecionado")
             {
@@ -166,6 +184,7 @@ namespace weblayer.transportador.android.exp.Activities
                 btnAnexarImagem.Visibility = ViewStates.Gone;
                 btnEnviar.Visibility = ViewStates.Gone;
                 btnSalvar.Visibility = ViewStates.Gone;
+                checkBoxGeolocalizacao.Visibility = ViewStates.Gone;
             }
 
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
@@ -199,6 +218,19 @@ namespace weblayer.transportador.android.exp.Activities
                 bitmap = helper.ByteArrayToImage(entrega.Image);
                 imageView.SetImageBitmap(bitmap);
             }
+
+            if (entrega.ds_geolocalizacao == null || entrega.ds_geolocalizacao == "")
+            {
+                txtGeolocalizacao.Visibility = ViewStates.Gone;
+                lblGeolocalizacao.Visibility = ViewStates.Gone;
+            }
+            else if (entrega.ds_geolocalizacao != null || entrega.ds_geolocalizacao != "")
+            {
+                lblGeolocalizacao.Visibility = ViewStates.Visible;
+                txtGeolocalizacao.Visibility = ViewStates.Visible;
+                txtGeolocalizacao.Text = entrega.ds_geolocalizacao.ToString();
+            }
+            checkBoxGeolocalizacao.Visibility = ViewStates.Gone;
         }
 
         private void BindModel()
@@ -221,6 +253,7 @@ namespace weblayer.transportador.android.exp.Activities
                 entrega.Image = bytes;
                 entrega.ds_ImageUri = imagefile.AbsolutePath;
             }
+            entrega.ds_geolocalizacao = txtGeolocalizacao.Text;
         }
 
         private void BindData()
@@ -232,10 +265,19 @@ namespace weblayer.transportador.android.exp.Activities
                 btnEnviarViaEmail.Visibility = ViewStates.Gone;
             }
 
-            if (entrega != null && entrega.ds_observacao == "")
+            if (entrega != null)
             {
-                txtObservacao.Visibility = ViewStates.Gone;
-                lblObservacao.Visibility = ViewStates.Gone;
+                if (entrega.ds_observacao == "")
+                {
+                    txtObservacao.Visibility = ViewStates.Gone;
+                    lblObservacao.Visibility = ViewStates.Gone;
+                }
+
+                if (entrega.ds_geolocalizacao == "")
+                {
+                    txtGeolocalizacao.Visibility = ViewStates.Gone;
+                    checkBoxGeolocalizacao.Visibility = ViewStates.Gone;
+                }
             }
 
             if (operacao != "selecionado")
@@ -244,6 +286,8 @@ namespace weblayer.transportador.android.exp.Activities
                 txtHoraEntrega.Click += TxtHoraEntrega_Click;
             }
 
+            lblGeolocalizacao.Visibility = ViewStates.Gone;
+            checkBoxGeolocalizacao.CheckedChange += CheckBoxGeolocalizacao_CheckedChange;
             btnEscanearNF.Click += BtnEscanearNF_Click;
             btnAnexarImagem.Click += ValidarPermissoes;
             btnEnviar.Click += BtnEnviar_Click;
@@ -251,6 +295,19 @@ namespace weblayer.transportador.android.exp.Activities
             btnEnviarViaEmail.Click += BtnEnviarViaEmail_Click;
             txtCodigoNF.FocusChange += TxtCodigoNF_FocusChange;
             imageView.Click += ImageView_Click;
+        }
+
+        private void CheckBoxGeolocalizacao_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (checkBoxGeolocalizacao.Checked)
+            {
+                GetGeolocalizacao();
+            }
+
+            if (!checkBoxGeolocalizacao.Checked)
+            {
+                txtGeolocalizacao.Text = "";
+            }
         }
 
         private void ImageView_Click(object sender, EventArgs e)
@@ -357,15 +414,15 @@ namespace weblayer.transportador.android.exp.Activities
 
         private void BtnEnviar_Click(object sender, EventArgs e)
         {
-            //Enviar no momento da inserção
-            Save();
+            VerificaGeolocalizacao();
             if (ValidateViews())
                 SendByEmail();
         }
 
         private void BtnSalvar_Click(object sender, EventArgs e)
         {
-            Save();
+            VerificaGeolocalizacao();
+            //Save();
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)
@@ -398,10 +455,6 @@ namespace weblayer.transportador.android.exp.Activities
         {
             switch (e.Item.ItemId)
             {
-                case Resource.Id.action_ajuda:
-                    StartActivity(typeof(Activity_Ajuda));
-                    break;
-
                 case Resource.Id.action_deletar:
                     Delete();
                     break;
@@ -460,6 +513,16 @@ namespace weblayer.transportador.android.exp.Activities
 
 
         //EVENTOS RESULTADOS
+        private void GetGeolocalizacao()
+        {
+            //Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
+            //Fragment_Geolocalizacao dialog = new Fragment_Geolocalizacao();
+            //dialog.DialogClosed += DialogGeoClosed;
+            //dialog.Show(transaction, "dialog");
+
+            Intent intent = new Intent(this, typeof(Activity_Geolocalizacao));
+            StartActivityForResult(intent, 0);
+        }
 
         private void DefinirOcorrencia()
         {
@@ -611,6 +674,28 @@ namespace weblayer.transportador.android.exp.Activities
                         }
                         break;
 
+
+                    case Result.FirstUser:
+                        string Lat = data.GetStringExtra("Lat");
+                        string Long = data.GetStringExtra("Lon");
+                        string mensagem = data.GetStringExtra("mensagem");
+                        string endereco = data.GetStringExtra("Endereco");
+
+                        if ((Lat == null || Lat == "") && (Long == null || Long == ""))
+                        {
+                            Toast.MakeText(this, "Endereço não encontrado. Verifique se seu GPS está ativado e tente novamente", ToastLength.Long).Show();
+                            txtGeolocalizacao.Visibility = ViewStates.Visible;
+                            txtGeolocalizacao.Text = "";
+                            checkBoxGeolocalizacao.Checked = false;
+                        }
+                        else
+                        {
+                            txtGeolocalizacao.Visibility = ViewStates.Visible;
+                            txtGeolocalizacao.Text = Lat + ", " + Long;
+                        }
+                        break;
+
+
                     case Result.Canceled:
                         break;
 
@@ -618,6 +703,39 @@ namespace weblayer.transportador.android.exp.Activities
                         break;
                 }
             }
+        }
+
+        public void VerificaGeolocalizacao()
+        {
+            if (checkBoxGeolocalizacao.Checked && (txtGeolocalizacao.Text == null || txtGeolocalizacao.Text == ""))
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+                alert.SetTitle("Não foi possível adquirir a geolocalização. Salvar assim mesmo?");
+                alert.SetPositiveButton("Sim", (senderAlert, args) =>
+                {
+                    try
+                    {
+                        Save();
+                    }
+                    catch (Exception ex)
+                    {
+                        Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+                    }
+
+                });
+                alert.SetNegativeButton("Não", (senderAlert, args) =>
+                {
+
+                });
+
+                RunOnUiThread(() =>
+                {
+                    alert.Show();
+                });
+            }
+            else
+                Save();
         }
 
         public void SendByEmail()
@@ -663,6 +781,7 @@ namespace weblayer.transportador.android.exp.Activities
                                              "\nOcorrência: " + descricaoocorrencia +
                                              "\nData de Inclusão: " + entrega.dt_inclusao +
                                              "\nData de Entrega: " + entrega.dt_entrega +
+                                             "\nGeoposicionamento: " + entrega.ds_geolocalizacao +
                                              "\nObservação: " + entrega.ds_observacao);
             email.SetType("application/image");
             Intent.CreateChooser(email, "Send Email Via");
@@ -678,7 +797,6 @@ namespace weblayer.transportador.android.exp.Activities
 
         }
 
-        //SAVE E RESTORE
         private void Delete()
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -734,8 +852,6 @@ namespace weblayer.transportador.android.exp.Activities
             {
                 Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
             }
-
-
         }
 
         private void SaveForm()

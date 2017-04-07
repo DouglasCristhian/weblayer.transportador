@@ -1,6 +1,7 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using System;
@@ -11,13 +12,16 @@ using weblayer.transportador.core.Model;
 
 namespace weblayer.transportador.android.exp.Activities
 {
-    [Activity(MainLauncher = false, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
-    public class Activity_Menu : Activity
+    [Activity(MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
+    public class Activity_Menu : AppCompatActivity
     {
         ListView ListViewEntrega;
         List<Entrega> ListaEntregas;
         private TextView txtEntregas;
         Android.Support.V7.Widget.Toolbar toolbar;
+        Android.Support.V4.App.Fragment fragment;
+        FrameLayout contentLayout;
+
         private int dataEmissao;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -101,8 +105,14 @@ namespace weblayer.transportador.android.exp.Activities
                     break;
 
                 case Resource.Id.action_ajuda:
-                    Intent intent2 = new Intent(this, typeof(Activity_Ajuda));
-                    StartActivityForResult(intent2, 0);
+
+                    Intent intent0 = new Intent(this, typeof(Activity_WebView));
+                    intent0.PutExtra("url", "http://www.weblayer.com.br/noticias-mobile");
+                    StartActivity(intent0);
+
+                    //fragment = Fragment_Ajuda.NewInstance();
+                    //this.Title = "Ajuda";
+                    //SupportFragmentManager.BeginTransaction().Replace(Resource.Id.content_frame, fragment).Commit();
                     break;
 
 
@@ -135,7 +145,7 @@ namespace weblayer.transportador.android.exp.Activities
 
         private void Delete(Entrega ent)
         {
-            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
 
             alert.SetTitle("Tem certeza que deseja excluir esta ocorrência?");
             alert.SetPositiveButton("Sim", (senderAlert, args) =>
@@ -179,7 +189,6 @@ namespace weblayer.transportador.android.exp.Activities
 
                 var mensagem = data.GetStringExtra("mensagem");
                 Toast.MakeText(this, mensagem, ToastLength.Short).Show();
-
             }
         }
     }

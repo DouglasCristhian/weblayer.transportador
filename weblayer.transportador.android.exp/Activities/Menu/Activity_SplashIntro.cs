@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace weblayer.transportador.android.exp.Activities
 {
-    [Activity(Theme = "@style/MyTheme.Splash", NoHistory = true, MainLauncher = true)]
+    [Activity(Theme = "@style/MyTheme.Splash", NoHistory = true, MainLauncher = false)]
     public class Activity_SplashIntro : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
