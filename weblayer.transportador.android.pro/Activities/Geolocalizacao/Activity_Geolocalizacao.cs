@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace weblayer.transportador.android.exp.Activities
+namespace weblayer.transportador.android.pro.Activities
 {
     [Activity()]
     public class Activity_Geolocalizacao : Activity, ILocationListener
@@ -24,7 +24,7 @@ namespace weblayer.transportador.android.exp.Activities
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.Geolocalizacao);
 
             locationManager = (LocationManager)GetSystemService(LocationService);
 

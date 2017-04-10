@@ -107,13 +107,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\Activity_Ajuda.cs" />
-    <Compile Include="Activities\Activity_Base.cs" />
-    <Compile Include="Activities\Activity_InformaEntrega.cs" />
-    <Compile Include="Activities\Activity_Menu.cs" />
-    <Compile Include="Activities\Activity_Novidades.cs" />
-    <Compile Include="Activities\Activity_Sobre.cs" />
-    <Compile Include="Activities\Activity_FiltrarEntregas.cs" />
+    <Compile Include="Activities\Menu\Activity_Base.cs" />
+    <Compile Include="Activities\Entrega\Activity_InformaEntrega.cs" />
+    <Compile Include="Activities\Menu\Activity_Menu.cs" />
+    <Compile Include="Activities\Menu\Activity_Novidades.cs" />
+    <Compile Include="Activities\Menu\Activity_Sobre.cs" />
+    <Compile Include="Activities\Entrega\Activity_FiltrarEntregas.cs" />
+    <Compile Include="Activities\Menu\Activity_SplashIntro.cs" />
+    <Compile Include="Activities\Menu\Activity_WebView.cs" />
+    <Compile Include="Activities\Geolocalizacao\Activity_Geolocalizacao.cs" />
     <Compile Include="Adapters\Adapter_EntregaListView.cs" />
     <Compile Include="Adapters\mySpinner.cs" />
     <Compile Include="Fragments\Fragment_ImageView.cs" />
@@ -308,6 +310,45 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\EditTextStyle.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SplashLayout.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Activity_WebView.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Geolocalizacao.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-land-hdpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-land-ldpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-land-mdpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-land-xhdpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-land-xxhdpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-port-hdpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-port-ldpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-port-mdpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-port-xhdpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-port-xxhdpi\SplashScreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

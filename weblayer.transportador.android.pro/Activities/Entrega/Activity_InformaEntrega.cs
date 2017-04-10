@@ -3,7 +3,6 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.Graphics;
-using Android.Locations;
 using Android.Media;
 using Android.OS;
 using Android.Provider;
@@ -15,9 +14,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using weblayer.transportador.android.exp.Adapters;
-using weblayer.transportador.android.exp.Fragments;
-using weblayer.transportador.android.exp.Helpers;
+using weblayer.transportador.android.pro.Adapters;
+using weblayer.transportador.android.pro.Fragments;
+using weblayer.transportador.android.pro.Helpers;
 using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.DAL;
 using weblayer.transportador.core.Model;
@@ -25,12 +24,12 @@ using ZXing.Mobile;
 using static Android.Widget.AdapterView;
 using JavaUri = Android.Net.Uri;
 
-namespace weblayer.transportador.android.exp.Activities
+namespace weblayer.transportador.android.pro.Activities
 {
     [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
     public class Activity_InformaEntrega : Activity_Base
     {
-        #region variaveis
+        #region Variaveis
         Android.Support.V7.Widget.Toolbar toolbar;
         public static string MyPREFERENCES = "MyPrefs";
         MobileBarcodeScanner scanner;
@@ -40,15 +39,17 @@ namespace weblayer.transportador.android.exp.Activities
         private EditText txtCodigoNF;
         private TextView lblCNPJ;
         private TextView lblNumeroNF;
-        private EditText txtGeolocalizacao;
         private EditText txtObservacao;
+        private EditText txtGeolocalizacao;
         private TextView txtDataEntrega;
         private TextView txtHoraEntrega;
         private TextView lblObservacao;
         private TextView lblGeolocalizacao;
+        private TextView lblStatus;
+        private TextView txtStatus;
         private Button btnEscanearNF;
-        private Button btnSalvar;
         private Button btnAnexarImagem;
+        private Button btnSalvar;
         private Button btnEnviar;
         private Button btnEnviarViaEmail;
         private ImageView imageView;
@@ -63,11 +64,7 @@ namespace weblayer.transportador.android.exp.Activities
         Android.Net.Uri contentUri;
         private bool camcheck;
         private bool lercheck;
-        Location currentLocation;
-        LocationManager locationManager;
-        string localizacao;
-        string locationProvider;
-        #endregion variaveis
+        #endregion Variaveis
 
         protected override int LayoutResource
         {
@@ -105,6 +102,7 @@ namespace weblayer.transportador.android.exp.Activities
 
         }
 
+
         //DEFININDO OBJETOS E EVENTOS
         private int getIndexByValue(Spinner spinner, long myId)
         {
@@ -125,6 +123,7 @@ namespace weblayer.transportador.android.exp.Activities
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_toolbar, menu);
+            menu.RemoveItem(Resource.Id.action_filtrar);
 
             if (operacao != "selecionado")
             {
@@ -133,17 +132,23 @@ namespace weblayer.transportador.android.exp.Activities
                 menu.RemoveItem(Resource.Id.action_ajuda);
                 menu.RemoveItem(Resource.Id.action_sobre);
                 menu.RemoveItem(Resource.Id.action_sair);
-                menu.RemoveItem(Resource.Id.action_filtrar);
+                menu.RemoveItem(Resource.Id.action_sincronizar);
+                menu.RemoveItem(Resource.Id.action_legenda);
             }
             else
             {
+                if ((entrega != null) && (entrega.fl_status == 1))
+                {
+                    menu.RemoveItem(Resource.Id.action_deletar);
+                }
+
                 menu.RemoveItem(Resource.Id.action_adicionar);
                 menu.RemoveItem(Resource.Id.action_ajuda);
                 menu.RemoveItem(Resource.Id.action_sobre);
                 menu.RemoveItem(Resource.Id.action_sair);
-                menu.RemoveItem(Resource.Id.action_filtrar);
+                menu.RemoveItem(Resource.Id.action_sincronizar);
+                menu.RemoveItem(Resource.Id.action_legenda);
             }
-
 
             return base.OnCreateOptionsMenu(menu);
         }
@@ -162,16 +167,17 @@ namespace weblayer.transportador.android.exp.Activities
             lblCNPJ = FindViewById<TextView>(Resource.Id.lblCNPJ);
             lblNumeroNF = FindViewById<TextView>(Resource.Id.lblNumeroNF);
             btnAnexarImagem = FindViewById<Button>(Resource.Id.btnAnexarImagem);
-            btnEscanearNF = FindViewById<Button>(Resource.Id.btnEscanearNF);
             btnSalvar = FindViewById<Button>(Resource.Id.btnSalvar);
+            btnEscanearNF = FindViewById<Button>(Resource.Id.btnEscanearNF);
             btnEnviar = FindViewById<Button>(Resource.Id.btnEnviar);
             btnEnviarViaEmail = FindViewById<Button>(Resource.Id.btnEnviarViaEmail);
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
+            lblStatus = FindViewById<TextView>(Resource.Id.lblStatus);
+            txtStatus = FindViewById<TextView>(Resource.Id.txtStatus);
             checkBoxGeolocalizacao = FindViewById<CheckBox>(Resource.Id.checkBoxGeolocalizacao);
             txtGeolocalizacao = FindViewById<EditText>(Resource.Id.txtGeolocalizacao);
-            #endregion
+            #endregion FindViewsById
 
-            //txtGeolocalizacao.Visibility = ViewStates.Gone;
             lblGeolocalizacao.Visibility = ViewStates.Gone;
 
             if (operacao == "selecionado")
@@ -186,6 +192,7 @@ namespace weblayer.transportador.android.exp.Activities
                 btnSalvar.Visibility = ViewStates.Gone;
                 checkBoxGeolocalizacao.Visibility = ViewStates.Gone;
             }
+
 
             imageView = FindViewById<ImageView>(Resource.Id.imageView);
 
@@ -219,6 +226,16 @@ namespace weblayer.transportador.android.exp.Activities
                 imageView.SetImageBitmap(bitmap);
             }
 
+            if (entrega.fl_status == 0)
+            {
+                txtStatus.Text = "Não Sincronizado";
+            }
+
+            if (entrega.fl_status == 1)
+            {
+                txtStatus.Text = "Sincronizado";
+            }
+
             if (entrega.ds_geolocalizacao == null || entrega.ds_geolocalizacao == "")
             {
                 txtGeolocalizacao.Visibility = ViewStates.Gone;
@@ -230,7 +247,10 @@ namespace weblayer.transportador.android.exp.Activities
                 txtGeolocalizacao.Visibility = ViewStates.Visible;
                 txtGeolocalizacao.Text = entrega.ds_geolocalizacao.ToString();
             }
+
             checkBoxGeolocalizacao.Visibility = ViewStates.Gone;
+            lblStatus.Visibility = ViewStates.Visible;
+            txtStatus.Visibility = ViewStates.Visible;
         }
 
         private void BindModel()
@@ -254,6 +274,7 @@ namespace weblayer.transportador.android.exp.Activities
                 entrega.ds_ImageUri = imagefile.AbsolutePath;
             }
             entrega.ds_geolocalizacao = txtGeolocalizacao.Text;
+
         }
 
         private void BindData()
@@ -263,6 +284,8 @@ namespace weblayer.transportador.android.exp.Activities
                 txtDataEntrega.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtHoraEntrega.Text = DateTime.Now.ToString("HH:mm");
                 btnEnviarViaEmail.Visibility = ViewStates.Gone;
+                lblStatus.Visibility = ViewStates.Gone;
+                txtStatus.Visibility = ViewStates.Gone;
             }
 
             if (entrega != null)
@@ -297,6 +320,7 @@ namespace weblayer.transportador.android.exp.Activities
             imageView.Click += ImageView_Click;
         }
 
+
         private void CheckBoxGeolocalizacao_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             if (checkBoxGeolocalizacao.Checked)
@@ -308,6 +332,12 @@ namespace weblayer.transportador.android.exp.Activities
             {
                 txtGeolocalizacao.Text = "";
             }
+        }
+
+        private void GetGeolocalizacao()
+        {
+            Intent intent = new Intent(this, typeof(Activity_Geolocalizacao));
+            StartActivityForResult(intent, 0);
         }
 
         private void ImageView_Click(object sender, EventArgs e)
@@ -391,11 +421,13 @@ namespace weblayer.transportador.android.exp.Activities
 
             if (spinnerOcorrencia.SelectedItemPosition == 0)
             {
+                ((TextView)spinnerOcorrencia.GetChildAt(0)).Error = ("Por favor, selecione a ocorrência");
                 validacao = false;
                 Toast.MakeText(this, "Por favor, selecione a ocorrência", ToastLength.Short).Show();
             }
 
-            //TODO: TERMINAR VALIDAÇÕES
+            //TODO: TERMINAR VALIDAÇÕES - validar o díg. verificador da NFe
+
             return validacao;
         }
 
@@ -405,6 +437,7 @@ namespace weblayer.transportador.android.exp.Activities
             spinOcorrencia = spinnerOcorrencia.SelectedItem.ToString();
         }
 
+
         //EVENTOS CLICK
         private void BtnEnviarViaEmail_Click(object sender, EventArgs e)
         {
@@ -412,22 +445,16 @@ namespace weblayer.transportador.android.exp.Activities
             SendByEmail();
         }
 
+        private void BtnSalvar_Click(object sender, EventArgs e)
+        {
+            VerificaGeolocalizacao();
+        }
+
         private void BtnEnviar_Click(object sender, EventArgs e)
         {
             VerificaGeolocalizacao();
             if (ValidateViews())
                 SendByEmail();
-        }
-
-        private void BtnSalvar_Click(object sender, EventArgs e)
-        {
-            VerificaGeolocalizacao();
-            //Save();
-        }
-
-        private void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            Finish();
         }
 
         private void TxtDataEntrega_Click(object sender, EventArgs e)
@@ -464,7 +491,6 @@ namespace weblayer.transportador.android.exp.Activities
         private async void BtnEscanearNF_Click(object sender, EventArgs e)
         {
             ZXing.Result result = null;
-            //scanner.UseCustomOverlay = false;
             scanner.TopText = "Aguarde o escaneamento do código de barras";
 
             new Thread(new ThreadStart(delegate
@@ -493,11 +519,19 @@ namespace weblayer.transportador.android.exp.Activities
 
         private void TirarFoto()
         {
+            //Intent intent = new Intent(MediaStore.ActionImageCapture);
+            //imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
+            //    Java.Lang.String.ValueOf(count++) + ".png");
+            //Android.Net.Uri tempuri = Android.Net.Uri.FromFile(imagefile);
+            //SaveForm();
+            //intent.PutExtra(MediaStore.ExtraOutput, tempuri);
+            //StartActivityForResult(intent, 0);
+
             Intent intent = new Intent(MediaStore.ActionImageCapture);
             //imagefile = new Java.IO.File(Android.OS.Environment.GetExternalStoragePublicDirectory(Android.OS.Environment.DirectoryPictures),
             //Java.Lang.String.ValueOf(count++) + ".jpeg");
 
-            var directory = new Java.IO.File(Android.OS.Environment.ExternalStorageDirectory, "W Transportador - Canhotos/").ToString();
+            var directory = new Java.IO.File(Android.OS.Environment.ExternalStorageDirectory, "W Transportador Pro - Canhotos/").ToString();
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
@@ -513,15 +547,38 @@ namespace weblayer.transportador.android.exp.Activities
 
 
         //EVENTOS RESULTADOS
-        private void GetGeolocalizacao()
-        {
-            //Android.App.FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            //Fragment_Geolocalizacao dialog = new Fragment_Geolocalizacao();
-            //dialog.DialogClosed += DialogGeoClosed;
-            //dialog.Show(transaction, "dialog");
 
-            Intent intent = new Intent(this, typeof(Activity_Geolocalizacao));
-            StartActivityForResult(intent, 0);
+        public void VerificaGeolocalizacao()
+        {
+            if (checkBoxGeolocalizacao.Checked && (txtGeolocalizacao.Text == null || txtGeolocalizacao.Text == ""))
+            {
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+                alert.SetTitle("Não foi possível adquirir a geolocalização. Salvar assim mesmo?");
+                alert.SetPositiveButton("Sim", (senderAlert, args) =>
+                {
+                    try
+                    {
+                        Save();
+                    }
+                    catch (Exception ex)
+                    {
+                        Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+                    }
+
+                });
+                alert.SetNegativeButton("Não", (senderAlert, args) =>
+                {
+
+                });
+
+                RunOnUiThread(() =>
+                {
+                    alert.Show();
+                });
+            }
+            else
+                Save();
         }
 
         private void DefinirOcorrencia()
@@ -621,8 +678,6 @@ namespace weblayer.transportador.android.exp.Activities
         protected override void OnActivityResult(int requestCode, Android.App.Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
-
-            this.RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
             if (requestCode == 0)
             {
                 switch (resultCode)
@@ -674,7 +729,6 @@ namespace weblayer.transportador.android.exp.Activities
                         }
                         break;
 
-
                     case Result.FirstUser:
                         string Lat = data.GetStringExtra("Lat");
                         string Long = data.GetStringExtra("Lon");
@@ -695,7 +749,6 @@ namespace weblayer.transportador.android.exp.Activities
                         }
                         break;
 
-
                     case Result.Canceled:
                         break;
 
@@ -705,43 +758,10 @@ namespace weblayer.transportador.android.exp.Activities
             }
         }
 
-        public void VerificaGeolocalizacao()
-        {
-            if (checkBoxGeolocalizacao.Checked && (txtGeolocalizacao.Text == null || txtGeolocalizacao.Text == ""))
-            {
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-                alert.SetTitle("Não foi possível adquirir a geolocalização. Salvar assim mesmo?");
-                alert.SetPositiveButton("Sim", (senderAlert, args) =>
-                {
-                    try
-                    {
-                        Save();
-                    }
-                    catch (Exception ex)
-                    {
-                        Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
-                    }
-
-                });
-                alert.SetNegativeButton("Não", (senderAlert, args) =>
-                {
-
-                });
-
-                RunOnUiThread(() =>
-                {
-                    alert.Show();
-                });
-            }
-            else
-                Save();
-        }
-
         public void SendByEmail()
         {
             var email = new Intent(Android.Content.Intent.ActionSend);
-            //email.PutExtra(Android.Content.Intent.ExtraCc, "Testando 123");
+            email.PutExtra(Android.Content.Intent.ExtraCc, "Testando 123");
 
             if (entrega.Image != null || entrega.ds_ImageUri != null)
             {
@@ -753,7 +773,7 @@ namespace weblayer.transportador.android.exp.Activities
                     bitmap = helper.ByteArrayToImage(entrega.Image);
 
                     var stream = new FileStream(imagefile.AbsolutePath, FileMode.Create);
-                    bitmap.Compress(Bitmap.CompressFormat.Jpeg, 50, stream);
+                    bitmap.Compress(Bitmap.CompressFormat.Png, 30, stream);
                     stream.Close();
 
                     Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
@@ -761,7 +781,8 @@ namespace weblayer.transportador.android.exp.Activities
                     mediaScanIntent.SetData(uri);
                     SendBroadcast(mediaScanIntent);
                 }
-                else if (imagefile.Exists())
+                else
+                if (imagefile.Exists())
                 {
                     ByteHelper helper = new ByteHelper();
                     bitmap = helper.ByteArrayToImage(entrega.Image);
@@ -781,8 +802,8 @@ namespace weblayer.transportador.android.exp.Activities
                                              "\nOcorrência: " + descricaoocorrencia +
                                              "\nData de Inclusão: " + entrega.dt_inclusao +
                                              "\nData de Entrega: " + entrega.dt_entrega +
-                                             "\nGeoposicionamento: " + entrega.ds_geolocalizacao +
-                                             "\nObservação: " + entrega.ds_observacao);
+                                             "\nObservação: " + entrega.ds_observacao +
+                                             "\nGeoposicionamento: " + entrega.ds_geolocalizacao);
             email.SetType("application/image");
             Intent.CreateChooser(email, "Enviar Email Via");
 
@@ -797,11 +818,20 @@ namespace weblayer.transportador.android.exp.Activities
 
         }
 
+
+
+        //SAVE E RESTORE
         private void Delete()
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
             alert.SetTitle("Tem certeza que deseja excluir este registro?");
+
+            alert.SetNegativeButton("Não", (senderAlert, args) =>
+            {
+
+            });
+
             alert.SetPositiveButton("Sim", (senderAlert, args) =>
             {
                 try
@@ -819,9 +849,6 @@ namespace weblayer.transportador.android.exp.Activities
                     Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
                 }
 
-            });
-            alert.SetNegativeButton("Não", (senderAlert, args) =>
-            {
             });
 
             RunOnUiThread(() =>
@@ -844,6 +871,7 @@ namespace weblayer.transportador.android.exp.Activities
                 Intent myIntent = new Intent(this, typeof(Activity_Menu));
                 myIntent.PutExtra("mensagem", Ent.mensagem);
                 SetResult(Result.Ok, myIntent);
+
                 //SendByEmail();
 
                 Finish();
@@ -852,6 +880,8 @@ namespace weblayer.transportador.android.exp.Activities
             {
                 Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
             }
+
+
         }
 
         private void SaveForm()

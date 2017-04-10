@@ -7,5 +7,5 @@
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.INTERNET" />
-	<application android:label="W/Transportador Exp" android:theme="@style/MaterialTheme" android:largeHeap="true" android:hardwareAccelerated="false"></application>
+	<application android:label="W/Transportador Exp" android:theme="@style/MaterialTheme" android:largeHeap="true" android:hardwareAccelerated="false" android:icon="@mipmap/ic_launcher"></application>
 </manifest>

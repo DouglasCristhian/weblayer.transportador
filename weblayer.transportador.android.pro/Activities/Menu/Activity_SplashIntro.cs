@@ -3,9 +3,9 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 
-namespace weblayer.transportador.android.exp.Activities
+namespace weblayer.transportador.android.pro.Activities
 {
-    [Activity(NoHistory = true, MainLauncher = true)]
+    [Activity(MainLauncher = true, NoHistory = true)]
     public class Activity_SplashIntro : Activity
     {
         protected override void OnCreate(Bundle bundle)

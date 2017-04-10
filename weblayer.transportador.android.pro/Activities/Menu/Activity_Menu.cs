@@ -1,27 +1,27 @@
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
-using weblayer.transportador.android.exp.Adapters;
+using System.Threading;
+using weblayer.transportador.android.pro.Adapters;
+using weblayer.transportador.android.pro.Fragments;
 using weblayer.transportador.core.BLL;
+using weblayer.transportador.core.DAL;
 using weblayer.transportador.core.Model;
 
-namespace weblayer.transportador.android.exp.Activities
+namespace weblayer.transportador.android.pro.Activities
 {
-    [Activity(MainLauncher = false, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
-    public class Activity_Menu : AppCompatActivity
+    [Activity(MainLauncher = false, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
+    public class Activity_Menu : Activity
     {
         ListView ListViewEntrega;
         List<Entrega> ListaEntregas;
         private TextView txtEntregas;
         Android.Support.V7.Widget.Toolbar toolbar;
-        Android.Support.V4.App.Fragment fragment;
-        FrameLayout contentLayout;
-
         private int dataEmissao;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -31,15 +31,12 @@ namespace weblayer.transportador.android.exp.Activities
 
             core.DAL.Database.Initialize();
 
-
-            //Todo  Implemntar filtro par as ocorr ncias
-
             FindViews();
             BindData();
             FillList(dataEmissao);
 
             toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            toolbar.Title = " W/Transportador Express";
+            toolbar.Title = " W/Transportador Professional";
             toolbar.InflateMenu(Resource.Menu.menu_toolbar);
             toolbar.Menu.RemoveItem(Resource.Id.action_deletar);
 
@@ -55,10 +52,10 @@ namespace weblayer.transportador.android.exp.Activities
         private void BindData()
         {
             ListViewEntrega.ItemClick += ListViewEntrega_ItemClick;
-            ListViewEntrega.ItemLongClick += ListViewEntrega_ItemLongClick1;
+            ListViewEntrega.ItemLongClick += ListViewEntrega_ItemLongClick;
         }
 
-        private void ListViewEntrega_ItemLongClick1(object sender, AdapterView.ItemLongClickEventArgs e)
+        private void ListViewEntrega_ItemLongClick(object sender, AdapterView.ItemLongClickEventArgs e)
         {
             var ListViewEntregaClick = sender as ListView;
             var t = ListaEntregas[e.Position];
@@ -99,20 +96,19 @@ namespace weblayer.transportador.android.exp.Activities
         {
             switch (e.Item.ItemId)
             {
+                case Resource.Id.action_filtrar:
+                    Intent intent0 = new Intent(this, typeof(Activity_FiltrarEntregas));
+                    StartActivityForResult(intent0, 0);
+                    break;
+
                 case Resource.Id.action_adicionar:
                     Intent intent = new Intent(this, typeof(Activity_InformaEntrega));
                     StartActivityForResult(intent, 0);
                     break;
 
                 case Resource.Id.action_ajuda:
-
-                    Intent intent0 = new Intent(this, typeof(Activity_WebView));
-                    intent0.PutExtra("url", "http://www.weblayer.com.br/noticias-mobile");
-                    StartActivity(intent0);
-
-                    //fragment = Fragment_Ajuda.NewInstance();
-                    //this.Title = "Ajuda";
-                    //SupportFragmentManager.BeginTransaction().Replace(Resource.Id.content_frame, fragment).Commit();
+                    Intent intent2 = new Intent(this, typeof(Activity_WebView));
+                    StartActivityForResult(intent2, 0);
                     break;
 
 
@@ -121,15 +117,45 @@ namespace weblayer.transportador.android.exp.Activities
                     StartActivityForResult(intent3, 0);
                     break;
 
-                case Resource.Id.action_filtrar:
-                    Intent intent4 = new Intent(this, typeof(Activity_FiltrarEntregas));
-                    StartActivityForResult(intent4, 0);
-                    break;
-
                 case Resource.Id.action_sair:
                     Finish();
                     break;
+
+                case Resource.Id.action_sincronizar:
+
+                    var progressDialog = ProgressDialog.Show(this, "Por favor aguarde...", "Verificando os dados...", true);
+                    new Thread(new ThreadStart(delegate
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                        RunOnUiThread(() => SincronizarTeste());
+                        //LOAD METHOD TO GET ACCOUNT INFO
+                        RunOnUiThread(() => Toast.MakeText(this, "Sincronizado com sucesso!", ToastLength.Short).Show());
+
+                        //HIDE PROGRESS DIALOG
+                        RunOnUiThread(() => progressDialog.Hide());
+                    })).Start();
+                    break;
+
+                case Resource.Id.action_legenda:
+                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    Fragment_Legendas dialog = new Fragment_Legendas();
+                    dialog.Show(transaction, "dialog");
+                    break;
             }
+        }
+
+        public void SincronizarTeste()
+        {
+            foreach (Entrega item in ListaEntregas)
+            {
+                EntregaRepository rep = new EntregaRepository();
+
+                item.fl_status = 1;
+                rep.Save(item);
+
+                FillList(dataEmissao);
+            }
+
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -145,7 +171,7 @@ namespace weblayer.transportador.android.exp.Activities
 
         private void Delete(Entrega ent)
         {
-            Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
             alert.SetTitle("Tem certeza que deseja excluir esta ocorrÍncia?");
             alert.SetPositiveButton("Sim", (senderAlert, args) =>
@@ -154,10 +180,6 @@ namespace weblayer.transportador.android.exp.Activities
                 {
                     var entrega = new EntregaManager();
                     entrega.Delete(ent);
-
-                    //Intent myIntent = new Intent(this, typeof(Activity_Menu));
-                    ////myIntent.PutExtra("mensagem", entrega.mensagem);
-                    //SetResult(Android.App.Result.Ok, myIntent);
 
                     Toast.MakeText(this, entrega.mensagem, ToastLength.Short).Show();
                     FillList(dataEmissao);
@@ -189,6 +211,7 @@ namespace weblayer.transportador.android.exp.Activities
 
                 var mensagem = data.GetStringExtra("mensagem");
                 Toast.MakeText(this, mensagem, ToastLength.Short).Show();
+
             }
         }
     }
