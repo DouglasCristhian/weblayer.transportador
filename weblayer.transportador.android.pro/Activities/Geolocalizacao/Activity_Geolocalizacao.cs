@@ -6,7 +6,6 @@ using Android.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace weblayer.transportador.android.pro.Activities
 {
@@ -34,7 +33,6 @@ namespace weblayer.transportador.android.pro.Activities
                 PowerRequirement = Power.Medium
             };
 
-
             IList<string> acceptableLocationProviders = locationManager.GetProviders(criteriaForLorcationService, true);
 
             if (acceptableLocationProviders.Any())
@@ -49,6 +47,7 @@ namespace weblayer.transportador.android.pro.Activities
             if (locationProvider == "")
             {
                 Intent intent = new Intent();
+                intent.PutExtra("mensagem", "Seu provedor de GPS parece estar desabilitado. Habilite-o e tente novamente");
                 SetResult(Result.FirstUser, intent);
                 Finish();
             }
@@ -73,51 +72,46 @@ namespace weblayer.transportador.android.pro.Activities
                     mensagem = "Endereço não encontrado. Tente novamente, por favor.";
                 else
                 {
-                    locationText = String.Format("{0},{1}", currentLocation.Latitude, currentLocation.Longitude);
+                    //locationText = String.Format("{0},{1}", currentLocation.Latitude, currentLocation.Longitude);
+                    //Geocoder geocoder = new Geocoder(this);
 
-                    Geocoder geocoder = new Geocoder(this);
+                    //IList<Address> adressList = geocoder.GetFromLocation(currentLocation.Latitude, currentLocation.Longitude, 10);
+                    //Address adress = adressList.FirstOrDefault();
 
+                    //if (adress != null)
+                    //{
+                    //    StringBuilder deviceAdress = new StringBuilder();
 
-                    IList<Address> adressList = geocoder.GetFromLocation(currentLocation.Latitude, currentLocation.Longitude, 10);
-                    Address adress = adressList.FirstOrDefault();
+                    //    for (int i = 0; i < adress.MaxAddressLineIndex; i++)
+                    //    {
+                    //        deviceAdress.Append(adress.GetAddressLine(i)).AppendLine(",");
+                    //    }
 
-                    if (adress != null)
-                    {
-                        StringBuilder deviceAdress = new StringBuilder();
+                    //    endereco = deviceAdress.ToString();
 
-                        for (int i = 0; i < adress.MaxAddressLineIndex; i++)
-                        {
-                            deviceAdress.Append(adress.GetAddressLine(i)).AppendLine(",");
-                        }
+                    intent.PutExtra("Lat", currentLocation.Latitude.ToString());
+                    intent.PutExtra("Lon", currentLocation.Longitude.ToString());
 
-                        endereco = deviceAdress.ToString();
-
-                        intent.PutExtra("Lat", adress.Latitude.ToString());
-                        intent.PutExtra("Lon", adress.Longitude.ToString());
-                        intent.PutExtra("Endereco", endereco);
-
-                        SetResult(Result.FirstUser, intent);
-                        Finish();
-                    }
-                    else
-                    {
-                        SetResult(Result.FirstUser, intent);
-                        Finish();
-                    }
+                    SetResult(Result.FirstUser, intent);
+                    Finish();
                 }
             }
             catch
             {
                 mensagem = "Endereço não encontrado. Tente novamente, por favor.";
                 intent.PutExtra("mensagem", mensagem);
-                SetResult(Result.Ok, intent);
+                SetResult(Result.FirstUser, intent);
                 Finish();
             }
         }
 
         public void OnProviderDisabled(string provider)
         {
-            throw new NotImplementedException();
+            Intent intent = new Intent();
+            mensagem = "Seu provedor de GPS foi desabilitado. Geolocalização cancelada";
+            intent.PutExtra("mensagem", mensagem);
+            SetResult(Result.FirstUser, intent);
+            Finish();
         }
 
         public void OnProviderEnabled(string provider)

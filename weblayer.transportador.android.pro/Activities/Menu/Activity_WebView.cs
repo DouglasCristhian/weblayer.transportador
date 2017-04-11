@@ -33,7 +33,7 @@ namespace weblayer.transportador.android.pro.Activities
 
             WebSettings webSettings = webView.Settings;
             webSettings.JavaScriptEnabled = true;
-            webView.LoadUrl("http://kb.weblayer.com.br/w-transportador-express/");
+            webView.LoadUrl("http://kb.weblayer.com.br/w-transportador-professional/");
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

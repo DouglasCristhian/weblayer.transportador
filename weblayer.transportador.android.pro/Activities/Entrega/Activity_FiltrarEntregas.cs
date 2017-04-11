@@ -45,7 +45,7 @@ namespace weblayer.transportador.android.pro
         {
             btnApagarFiltros = FindViewById<Button>(Resource.Id.btnApagarFiltros);
             spinnerDataEmissao = FindViewById<Spinner>(Resource.Id.spinnerDataEmissao);
-            spinnerDataEmissao.SetBackgroundResource(Resource.Drawable.EditTextStyle);
+            //spinnerDataEmissao.SetBackgroundResource(Resource.Drawable.EditTextStyle);
         }
 
         private void BindData()

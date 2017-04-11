@@ -325,7 +325,12 @@ namespace weblayer.transportador.android.pro.Activities
         {
             if (checkBoxGeolocalizacao.Checked)
             {
-                GetGeolocalizacao();
+                if (GetGeolocalizacao(this))
+                {
+                    IntentGeolocalizacao();
+                }
+                else
+                    return;
             }
 
             if (!checkBoxGeolocalizacao.Checked)
@@ -334,11 +339,33 @@ namespace weblayer.transportador.android.pro.Activities
             }
         }
 
-        private void GetGeolocalizacao()
+        private void IntentGeolocalizacao()
         {
             Intent intent = new Intent(this, typeof(Activity_Geolocalizacao));
             StartActivityForResult(intent, 0);
         }
+
+        private bool GetGeolocalizacao(Context context)
+        {
+            bool resultado = true;
+            int IntGeo = 000;
+
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+            {
+                if (ActivityCompat.CheckSelfPermission(context, Manifest.Permission.AccessFineLocation) != Permission.Granted &&
+                    ActivityCompat.CheckSelfPermission(context, Manifest.Permission.AccessCoarseLocation) != Permission.Granted)
+                {
+                    resultado = false;
+
+                    ActivityCompat.RequestPermissions((Activity)context, new string[]
+                    {
+                        Manifest.Permission.AccessFineLocation }, IntGeo);
+                }
+            }
+
+            return resultado;
+        }
+
 
         private void ImageView_Click(object sender, EventArgs e)
         {
@@ -597,6 +624,19 @@ namespace weblayer.transportador.android.pro.Activities
         {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
+            if ((requestCode == 000))
+            {
+                if (grantResults[0] == Permission.Granted)
+                {
+                    IntentGeolocalizacao();
+                }
+                else
+                {
+                    Toast.MakeText(this, "Não é possível usar o GPS sem as devidas permissões", ToastLength.Long).Show();
+                    return;
+                }
+            }
+
             if ((requestCode == 111))
             {
                 if (grantResults[0] == Permission.Granted)
@@ -730,6 +770,7 @@ namespace weblayer.transportador.android.pro.Activities
                         break;
 
                     case Result.FirstUser:
+
                         string Lat = data.GetStringExtra("Lat");
                         string Long = data.GetStringExtra("Lon");
                         string mensagem = data.GetStringExtra("mensagem");
@@ -737,7 +778,7 @@ namespace weblayer.transportador.android.pro.Activities
 
                         if ((Lat == null || Lat == "") && (Long == null || Long == ""))
                         {
-                            Toast.MakeText(this, "Endereço não encontrado. Verifique se seu GPS está ativado e tente novamente", ToastLength.Long).Show();
+                            Toast.MakeText(this, mensagem.ToString(), ToastLength.Long).Show();
                             txtGeolocalizacao.Visibility = ViewStates.Visible;
                             txtGeolocalizacao.Text = "";
                             checkBoxGeolocalizacao.Checked = false;

@@ -110,7 +110,7 @@ namespace weblayer.transportador.android.exp.Activities
             {
                 mensagem = "Endereço não encontrado. Tente novamente, por favor.";
                 intent.PutExtra("mensagem", mensagem);
-                SetResult(Result.Ok, intent);
+                SetResult(Result.FirstUser, intent);
                 Finish();
             }
         }

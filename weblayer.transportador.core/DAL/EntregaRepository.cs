@@ -86,7 +86,7 @@ namespace weblayer.transportador.core.DAL
             Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 3, dt_inclusao = DateTime.Parse("2017/03/08"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Tudo errado", fl_status = 1 });
             Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 4, dt_inclusao = DateTime.Parse("2017/04/02"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Tudo errado", fl_status = 1 });
             Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 1, dt_inclusao = DateTime.Parse("2017/03/02"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Tudo errado", fl_status = 1 });
-            Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 3, dt_inclusao = DateTime.Parse("2017/02/07"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Nada a declarar", fl_status = 1, ds_geolocalizacao = "15,8741688, -53,5272828" });
+            Save(new Entrega { ds_NFE = "35160972456809001709550010000114581062554946", id_ocorrencia = 3, dt_inclusao = DateTime.Parse("2017/03/12"), dt_entrega = DateTime.Parse("2016/05/01"), ds_observacao = "Nada a declarar", fl_status = 0, ds_geolocalizacao = "15,8741688, -53,5272828", });
         }
     }
 }
