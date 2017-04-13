@@ -64,6 +64,7 @@ namespace weblayer.transportador.android.pro.Activities
         Android.Net.Uri contentUri;
         private bool camcheck;
         private bool lercheck;
+        private bool PROSSEGUIR;
         #endregion Variaveis
 
         protected override int LayoutResource
@@ -312,7 +313,7 @@ namespace weblayer.transportador.android.pro.Activities
             lblGeolocalizacao.Visibility = ViewStates.Gone;
             checkBoxGeolocalizacao.CheckedChange += CheckBoxGeolocalizacao_CheckedChange;
             btnEscanearNF.Click += BtnEscanearNF_Click;
-            btnAnexarImagem.Click += ValidarPermissoes;
+            btnAnexarImagem.Click += BtnAnexarImagem_Click;
             btnEnviar.Click += BtnEnviar_Click;
             btnSalvar.Click += BtnSalvar_Click;
             btnEnviarViaEmail.Click += BtnEnviarViaEmail_Click;
@@ -320,22 +321,13 @@ namespace weblayer.transportador.android.pro.Activities
             imageView.Click += ImageView_Click;
         }
 
-
-        private void CheckBoxGeolocalizacao_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        private void BtnAnexarImagem_Click(object sender, EventArgs e)
         {
-            if (checkBoxGeolocalizacao.Checked)
-            {
-                if (GetGeolocalizacao(this))
-                {
-                    IntentGeolocalizacao();
-                }
-                else
-                    return;
-            }
+            PermissoesGarantidas(0);
 
-            if (!checkBoxGeolocalizacao.Checked)
+            if (PROSSEGUIR == true)
             {
-                txtGeolocalizacao.Text = "";
+                TirarFoto();
             }
         }
 
@@ -345,26 +337,19 @@ namespace weblayer.transportador.android.pro.Activities
             StartActivityForResult(intent, 0);
         }
 
-        private bool GetGeolocalizacao(Context context)
+        private void GetGeolocalizacao(Context context)
         {
-            bool resultado = true;
-            int IntGeo = 000;
-
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+            if (ActivityCompat.CheckSelfPermission(context, Manifest.Permission.AccessFineLocation) == Permission.Granted)
             {
-                if (ActivityCompat.CheckSelfPermission(context, Manifest.Permission.AccessFineLocation) != Permission.Granted &&
-                    ActivityCompat.CheckSelfPermission(context, Manifest.Permission.AccessCoarseLocation) != Permission.Granted)
-                {
-                    resultado = false;
-
-                    ActivityCompat.RequestPermissions((Activity)context, new string[]
-                    {
-                        Manifest.Permission.AccessFineLocation }, IntGeo);
-                }
+                IntentGeolocalizacao();
             }
-
-            return resultado;
+            else
+            {
+                string[] permissionRequest = { Manifest.Permission.AccessFineLocation };
+                RequestPermissions(permissionRequest, 333);
+            }
         }
+
 
 
         private void ImageView_Click(object sender, EventArgs e)
@@ -515,7 +500,29 @@ namespace weblayer.transportador.android.pro.Activities
             }
         }
 
-        private async void BtnEscanearNF_Click(object sender, EventArgs e)
+        private void BtnEscanearNF_Click(object sender, EventArgs e)
+        {
+            PermissoesGarantidas(0);
+            if (PROSSEGUIR == true)
+            {
+                Scanner();
+            }
+        }
+
+        private void CheckBoxGeolocalizacao_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (checkBoxGeolocalizacao.Checked)
+            {
+                GetGeolocalizacao(this);
+            }
+
+            if (!checkBoxGeolocalizacao.Checked)
+            {
+                txtGeolocalizacao.Text = "";
+            }
+        }
+
+        private async void Scanner()
         {
             ZXing.Result result = null;
             scanner.TopText = "Aguarde o escaneamento do código de barras";
@@ -574,6 +581,39 @@ namespace weblayer.transportador.android.pro.Activities
 
 
         //EVENTOS RESULTADOS
+        public void PermissoesGarantidas(int valor)
+        {
+            if (valor == 0)
+            {
+                if ((ActivityCompat.CheckSelfPermission(this, Manifest.Permission.Camera) == Permission.Granted))
+                {
+                    camcheck = true;
+                    if (lercheck == true && camcheck == true)
+                    {
+                        PROSSEGUIR = true;
+                    }
+                }
+                else
+                {
+                    string[] permissionRequest = { Manifest.Permission.Camera };
+                    RequestPermissions(permissionRequest, 111);
+                }
+
+                if ((ActivityCompat.CheckSelfPermission(this, Manifest.Permission.ReadExternalStorage) == Permission.Granted))
+                {
+                    lercheck = true;
+                    if (lercheck == true && camcheck == true)
+                    {
+                        PROSSEGUIR = true;
+                    }
+                }
+                else
+                {
+                    string[] permissionRequest = { Manifest.Permission.ReadExternalStorage };
+                    RequestPermissions(permissionRequest, 222);
+                }
+            }
+        }
 
         public void VerificaGeolocalizacao()
         {
@@ -624,27 +664,19 @@ namespace weblayer.transportador.android.pro.Activities
         {
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            if ((requestCode == 000))
-            {
-                if (grantResults[0] == Permission.Granted)
-                {
-                    IntentGeolocalizacao();
-                }
-                else
-                {
-                    Toast.MakeText(this, "Não é possível usar o GPS sem as devidas permissões", ToastLength.Long).Show();
-                    return;
-                }
-            }
-
             if ((requestCode == 111))
             {
                 if (grantResults[0] == Permission.Granted)
                 {
-                    camcheck = true;
+                    //camcheck = true;
+                    if ((camcheck == true) && (lercheck == true))
+                    {
+                        PROSSEGUIR = true;
+                        TirarFoto();
+                    }
                 }
                 else
-                    Toast.MakeText(this, "Não é possível usar a câmera sem as devidas permissões", ToastLength.Long).Show();
+                    Toast.MakeText(this, "Não é possível usar a câmera sem as devidas permissões", ToastLength.Short).Show();
                 return;
             }
 
@@ -652,39 +684,32 @@ namespace weblayer.transportador.android.pro.Activities
             {
                 if (grantResults[0] == Permission.Granted)
                 {
-                    lercheck = true;
+                    //lercheck = true;
+                    if ((camcheck == true) && (lercheck == true))
+                    {
+                        PROSSEGUIR = true;
+                        Scanner();
+                    }
                 }
                 else
                 {
-                    Toast.MakeText(this, "Não é possível usar a câmera sem as devidas permissões", ToastLength.Long).Show();
+                    Toast.MakeText(this, "Não é possível usar a câmera sem as devidas permissões", ToastLength.Short).Show();
                     return;
                 }
             }
 
-            if ((camcheck == true) && (lercheck == true))
+            if ((requestCode == 333))
             {
-                TirarFoto();
-            }
-        }
-
-        private void ValidarPermissoes(object sender, System.EventArgs e)
-        {
-            if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.ReadExternalStorage) == Permission.Granted)
-            {
-                if ((ActivityCompat.CheckSelfPermission(this, Manifest.Permission.Camera) == Permission.Granted))
+                if (grantResults[0] == Permission.Granted)
                 {
-                    TirarFoto();
+                    IntentGeolocalizacao();
                 }
                 else
                 {
-                    string[] permissionRequest = { Manifest.Permission.Camera };
-                    RequestPermissions(permissionRequest, 111);
+                    Toast.MakeText(this, "Não é possível usar o GPS sem as devidas permissões", ToastLength.Short).Show();
+                    checkBoxGeolocalizacao.Checked = false;
+                    return;
                 }
-            }
-            else
-            {
-                string[] permissionRequest = { Manifest.Permission.ReadExternalStorage };
-                RequestPermissions(permissionRequest, 222);
             }
         }
 

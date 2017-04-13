@@ -158,6 +158,7 @@
     <Compile Include="Helpers\ByteHelper.cs" />
     <Compile Include="Helpers\DatePicker_Helper.cs" />
     <Compile Include="Helpers\DialogEventArgs.cs" />
+    <Compile Include="Helpers\LocationListener.cs" />
     <Compile Include="Helpers\Mask.cs" />
     <Compile Include="Helpers\Substring_Helper.cs" />
     <Compile Include="Helpers\TimePicker_Helper.cs" />

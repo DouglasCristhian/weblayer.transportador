@@ -6,7 +6,6 @@ using Android.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace weblayer.transportador.android.exp.Activities
 {
@@ -73,37 +72,37 @@ namespace weblayer.transportador.android.exp.Activities
                     mensagem = "Endereço não encontrado. Tente novamente, por favor.";
                 else
                 {
-                    locationText = String.Format("{0},{1}", currentLocation.Latitude, currentLocation.Longitude);
+                    //locationText = String.Format("{0},{1}", currentLocation.Latitude, currentLocation.Longitude);
 
-                    Geocoder geocoder = new Geocoder(this);
+                    //Geocoder geocoder = new Geocoder(this);
 
 
-                    IList<Address> adressList = geocoder.GetFromLocation(currentLocation.Latitude, currentLocation.Longitude, 10);
-                    Address adress = adressList.FirstOrDefault();
+                    //IList<Address> adressList = geocoder.GetFromLocation(currentLocation.Latitude, currentLocation.Longitude, 10);
+                    //Address adress = adressList.FirstOrDefault();
 
-                    if (adress != null)
-                    {
-                        StringBuilder deviceAdress = new StringBuilder();
+                    ////if (adress != null)
+                    ////{
+                    //    StringBuilder deviceAdress = new StringBuilder();
 
-                        for (int i = 0; i < adress.MaxAddressLineIndex; i++)
-                        {
-                            deviceAdress.Append(adress.GetAddressLine(i)).AppendLine(",");
-                        }
+                    //    for (int i = 0; i < adress.MaxAddressLineIndex; i++)
+                    //    {
+                    //        deviceAdress.Append(adress.GetAddressLine(i)).AppendLine(",");
+                    //    }
 
-                        endereco = deviceAdress.ToString();
+                    //    endereco = deviceAdress.ToString();
 
-                        intent.PutExtra("Lat", adress.Latitude.ToString());
-                        intent.PutExtra("Lon", adress.Longitude.ToString());
-                        intent.PutExtra("Endereco", endereco);
+                    intent.PutExtra("Lat", currentLocation.Latitude.ToString());
+                    intent.PutExtra("Lon", currentLocation.Longitude.ToString());
+                    intent.PutExtra("Endereco", endereco);
 
-                        SetResult(Result.FirstUser, intent);
-                        Finish();
-                    }
-                    else
-                    {
-                        SetResult(Result.FirstUser, intent);
-                        Finish();
-                    }
+                    SetResult(Result.FirstUser, intent);
+                    Finish();
+                    //}
+                    //else
+                    //{
+                    //    SetResult(Result.FirstUser, intent);
+                    //    Finish();
+                    //}
                 }
             }
             catch

@@ -252,6 +252,10 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\weblayer.transportador.android.exp\weblayer.transportador.android.exp.csproj">
+      <Project>{A81613A7-26AA-44BA-A595-04B67E1CF530}</Project>
+      <Name>weblayer.transportador.android.exp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\weblayer.transportador.core\weblayer.transportador.core.csproj">
       <Project>{6629EF01-AA5B-4CE3-8526-F35B559B49CC}</Project>
       <Name>weblayer.transportador.core</Name>

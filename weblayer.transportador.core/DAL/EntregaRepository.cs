@@ -73,7 +73,7 @@ namespace weblayer.transportador.core.DAL
             var result_data = Database.GetConnection().Query<Entrega>($@"SELECT * FROM Entrega where 
             dt_inclusao>=@intervalo_inicio and dt_inclusao<=@intervalo_fim", intervalo_inicio, intervalo_fim);
 
-            return result_data.ToList();
+            return result_data.OrderBy(x => -x.id).ToList();
         }
 
         public void MakeDataMock()
