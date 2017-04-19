@@ -1,13 +1,13 @@
+using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using System.Collections.Generic;
-using weblayer.transportador.android.pro.Activities;
+using weblayer.transportador.android.pro.Activities.Menu;
 using weblayer.transportador.android.pro.Adapters;
 
-namespace weblayer.transportador.android.pro
+namespace weblayer.transportador.android.pro.Activities.Entrega
 {
     [Activity(Label = "Filtro")]
     public class Activity_FiltrarEntregas : Activity_Base

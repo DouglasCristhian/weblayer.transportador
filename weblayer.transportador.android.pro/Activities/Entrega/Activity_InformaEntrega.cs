@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Threading;
 using Android;
 using Android.App;
 using Android.Content;
@@ -9,22 +14,17 @@ using Android.Provider;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Threading;
+using weblayer.transportador.android.pro.Activities.Geolocalizacao;
+using weblayer.transportador.android.pro.Activities.Menu;
 using weblayer.transportador.android.pro.Adapters;
 using weblayer.transportador.android.pro.Fragments;
 using weblayer.transportador.android.pro.Helpers;
 using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.DAL;
-using weblayer.transportador.core.Model;
 using ZXing.Mobile;
-using static Android.Widget.AdapterView;
 using JavaUri = Android.Net.Uri;
 
-namespace weblayer.transportador.android.pro.Activities
+namespace weblayer.transportador.android.pro.Activities.Entrega
 {
     [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
     public class Activity_InformaEntrega : Activity_Base
@@ -56,7 +56,7 @@ namespace weblayer.transportador.android.pro.Activities
         private CheckBox checkBoxGeolocalizacao;
         private byte[] bytes;
         private Android.Graphics.Bitmap bitmap;
-        private Entrega entrega;
+        private core.Model.Entrega entrega;
         private string operacao;
         private string spinOcorrencia;
         private string descricaoocorrencia;
@@ -160,7 +160,7 @@ namespace weblayer.transportador.android.pro.Activities
             lblGeolocalizacao = FindViewById<TextView>(Resource.Id.lblGeolocalizacao);
             txtCodigoNF = FindViewById<EditText>(Resource.Id.txtCodigoNF);
             spinnerOcorrencia = FindViewById<Spinner>(Resource.Id.spinnerOcorrencia);
-            spinnerOcorrencia.ItemSelected += new EventHandler<ItemSelectedEventArgs>(SpinnerOcorrencia_ItemSelected);
+            spinnerOcorrencia.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(SpinnerOcorrencia_ItemSelected);
             txtDataEntrega = FindViewById<TextView>(Resource.Id.txtDataEntrega);
             txtHoraEntrega = FindViewById<TextView>(Resource.Id.txtHoraEntrega);
             txtObservacao = FindViewById<EditText>(Resource.Id.txtObservacao);
@@ -257,7 +257,7 @@ namespace weblayer.transportador.android.pro.Activities
         private void BindModel()
         {
             if (entrega == null)
-                entrega = new Entrega();
+                entrega = new core.Model.Entrega();
 
             entrega.ds_NFE = txtCodigoNF.Text.ToString();
 
@@ -443,7 +443,7 @@ namespace weblayer.transportador.android.pro.Activities
             return validacao;
         }
 
-        private void SpinnerOcorrencia_ItemSelected(object sender, ItemSelectedEventArgs e)
+        private void SpinnerOcorrencia_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
         {
             txtCodigoNF.ClearFocus();
             spinOcorrencia = spinnerOcorrencia.SelectedItem.ToString();

@@ -1,10 +1,10 @@
+using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using System.Collections.Generic;
 
-namespace weblayer.transportador.android.pro.Activities
+namespace weblayer.transportador.android.pro.Activities.Menu
 {
     [Activity(Label = "Sobre")]
     public class Activity_Sobre : Activity_Base

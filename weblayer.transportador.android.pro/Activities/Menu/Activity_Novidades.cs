@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace weblayer.transportador.android.pro.Activities
+namespace weblayer.transportador.android.pro.Activities.Menu
 {
     [Activity(Label = "Novidades")]
     public class Activity_Novidades : Activity_Base

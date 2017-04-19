@@ -1,25 +1,26 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using System;
-using System.Collections.Generic;
-using System.Threading;
+using weblayer.transportador.android.pro.Activities.Entrega;
 using weblayer.transportador.android.pro.Adapters;
 using weblayer.transportador.android.pro.Fragments;
 using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.DAL;
 using weblayer.transportador.core.Model;
 
-namespace weblayer.transportador.android.pro.Activities
+namespace weblayer.transportador.android.pro.Activities.Menu
 {
-    [Activity(MainLauncher = false, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation |
+    [Activity(MainLauncher = true, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation |
         Android.Content.PM.ConfigChanges.ScreenSize)]
     public class Activity_Menu : Activity
     {
         ListView ListViewEntrega;
-        List<Entrega> ListaEntregas;
+        List<core.Model.Entrega> ListaEntregas;
         private TextView txtEntregas;
         Android.Support.V7.Widget.Toolbar toolbar;
         private int dataEmissao;
@@ -146,7 +147,7 @@ namespace weblayer.transportador.android.pro.Activities
 
         public void SincronizarTeste()
         {
-            foreach (Entrega item in ListaEntregas)
+            foreach (core.Model.Entrega item in ListaEntregas)
             {
                 EntregaRepository rep = new EntregaRepository();
 
@@ -169,7 +170,7 @@ namespace weblayer.transportador.android.pro.Activities
             return base.OnOptionsItemSelected(item);
         }
 
-        private void Delete(Entrega ent)
+        private void Delete(core.Model.Entrega ent)
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
