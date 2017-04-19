@@ -1,9 +1,8 @@
-
 using Android.App;
 using Android.OS;
 using Android.Support.V7.App;
 
-namespace weblayer.transportador.android.pro.Activities
+namespace weblayer.transportador.android.pro.Activities.Menu
 {
     [Activity]
     public abstract class Activity_Base : AppCompatActivity

@@ -1,13 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Locations;
 using Android.OS;
 using Android.Runtime;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace weblayer.transportador.android.pro.Activities
+namespace weblayer.transportador.android.pro.Activities.Geolocalizacao
 {
     [Activity()]
     public class Activity_Geolocalizacao : Activity, ILocationListener
