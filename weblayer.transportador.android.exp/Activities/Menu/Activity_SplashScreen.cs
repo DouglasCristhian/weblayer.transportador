@@ -6,7 +6,7 @@ using Android.Views;
 namespace weblayer.transportador.android.exp.Activities
 {
     [Activity(MainLauncher = true, NoHistory = true)]
-    public class Activity_SplashIntro : Activity
+    public class Activity_SplashScreen : Activity
     {
         protected override void OnCreate(Bundle bundle)
         {
