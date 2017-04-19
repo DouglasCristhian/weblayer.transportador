@@ -3,7 +3,7 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 
-namespace weblayer.transportador.android.pro.Activities
+namespace weblayer.transportador.android.exp.Activities
 {
     [Activity(MainLauncher = true, NoHistory = true)]
     public class Activity_SplashIntro : Activity
@@ -29,7 +29,7 @@ namespace weblayer.transportador.android.pro.Activities
 
         private void LoadActivity()
         {
-            System.Threading.Thread.Sleep(5000); //Simulate a long pause    
+            System.Threading.Thread.Sleep(5000);
             RunOnUiThread(() => StartActivity(typeof(Activity_Menu)));
         }
     }

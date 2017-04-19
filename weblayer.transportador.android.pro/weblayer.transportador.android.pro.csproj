@@ -113,7 +113,6 @@
     <Compile Include="Activities\Menu\Activity_Novidades.cs" />
     <Compile Include="Activities\Menu\Activity_Sobre.cs" />
     <Compile Include="Activities\Entrega\Activity_FiltrarEntregas.cs" />
-    <Compile Include="Activities\Menu\Activity_SplashIntro.cs" />
     <Compile Include="Activities\Menu\Activity_WebView.cs" />
     <Compile Include="Activities\Geolocalizacao\Activity_Geolocalizacao.cs" />
     <Compile Include="Adapters\Adapter_EntregaListView.cs" />
@@ -316,9 +315,6 @@
     <AndroidResource Include="Resources\drawable\EditTextStyle.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\SplashLayout.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\layout\Activity_WebView.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +349,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-port-xxhdpi\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\SplashLayout.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
