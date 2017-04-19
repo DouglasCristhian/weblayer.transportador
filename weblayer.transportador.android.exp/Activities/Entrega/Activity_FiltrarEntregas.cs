@@ -4,7 +4,6 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using System.Collections.Generic;
-using weblayer.transportador.android.exp.Activities.Menu;
 using weblayer.transportador.android.exp.Adapters;
 
 namespace weblayer.transportador.android.exp.Activities

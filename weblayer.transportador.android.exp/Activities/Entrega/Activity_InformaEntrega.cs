@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using weblayer.transportador.android.exp.Activities.Menu;
 using weblayer.transportador.android.exp.Adapters;
 using weblayer.transportador.android.exp.Fragments;
 using weblayer.transportador.android.exp.Helpers;

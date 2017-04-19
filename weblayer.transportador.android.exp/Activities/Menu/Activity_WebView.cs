@@ -5,7 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Webkit;
 
-namespace weblayer.transportador.android.exp.Activities.Menu
+namespace weblayer.transportador.android.exp.Activities
 {
     [Activity(Label = "Ajuda")]
     public class Activity_WebView : Activity_Base

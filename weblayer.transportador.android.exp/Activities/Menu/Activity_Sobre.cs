@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 
-namespace weblayer.transportador.android.exp.Activities.Menu
+namespace weblayer.transportador.android.exp.Activities
 {
     [Activity(Label = "Sobre")]
     public class Activity_Sobre : Activity_Base

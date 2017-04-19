@@ -2,7 +2,7 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 
-namespace weblayer.transportador.android.exp.Activities
+namespace weblayer.transportador.android.pro.Activities.Menu
 {
     [Activity(MainLauncher = true, NoHistory = true)]
     public class Activity_SplashScreen : Activity
