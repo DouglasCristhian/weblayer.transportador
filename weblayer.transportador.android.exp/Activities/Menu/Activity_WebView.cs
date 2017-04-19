@@ -59,27 +59,23 @@ namespace weblayer.transportador.android.exp.Activities
 
             public override void OnPageStarted(WebView view, string url, Bitmap favicon)
             {
+                pd = new ProgressDialog(contextForDialog);
+                pd.SetTitle("Aguarde...");
+                pd.SetMessage("Conteúdo sendo carregado...");
+                pd.Show();
                 base.OnPageStarted(view, url, favicon);
-
-                //pd = new ProgressDialog(contextForDialog);
-                //pd.SetTitle("Aguarde...");
-                //pd.SetMessage("Conteúdo sendo carregado...");
-                //pd.Show();
             }
 
             public override bool ShouldOverrideUrlLoading(WebView view, string url)
             {
                 view.LoadUrl(url);
-
-                //if (pd.IsShowing)
-                //    pd.Dismiss();
                 return true;
             }
 
             public override void OnPageFinished(WebView view, string url)
             {
-                //if (pd.IsShowing)
-                //    pd.Dismiss();
+                pd.Dismiss();
+                base.OnPageFinished(view, url);
             }
         }
     }

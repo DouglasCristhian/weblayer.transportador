@@ -10,10 +10,20 @@ namespace weblayer.transportador.android.pro.Activities
     {
         protected override void OnCreate(Bundle bundle)
         {
-            RequestWindowFeature(WindowFeatures.NoTitle);
             base.OnCreate(bundle);
 
+            RequestWindowFeature(WindowFeatures.NoTitle);
             SetContentView(Resource.Layout.SplashLayout);
+
+            if (Resources.Configuration.Orientation == Android.Content.Res.Orientation.Portrait)
+            {
+                this.RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
+            }
+            else
+            {
+                this.RequestedOrientation = Android.Content.PM.ScreenOrientation.Landscape;
+            }
+
             System.Threading.ThreadPool.QueueUserWorkItem(o => LoadActivity());
         }
 

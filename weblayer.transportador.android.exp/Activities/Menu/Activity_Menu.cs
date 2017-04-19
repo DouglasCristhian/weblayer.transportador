@@ -19,8 +19,6 @@ namespace weblayer.transportador.android.exp.Activities
         List<Entrega> ListaEntregas;
         private TextView txtEntregas;
         Android.Support.V7.Widget.Toolbar toolbar;
-        Android.Support.V4.App.Fragment fragment;
-        FrameLayout contentLayout;
 
         private int dataEmissao;
 
@@ -30,9 +28,6 @@ namespace weblayer.transportador.android.exp.Activities
             SetContentView(Resource.Layout.Activity_Menu);
 
             core.DAL.Database.Initialize();
-
-
-            //Todo  Implemntar filtro par as ocorr ncias
 
             FindViews();
             BindData();
@@ -105,14 +100,7 @@ namespace weblayer.transportador.android.exp.Activities
                     break;
 
                 case Resource.Id.action_ajuda:
-
-                    Intent intent0 = new Intent(this, typeof(Activity_WebView));
-                    intent0.PutExtra("url", "http://www.weblayer.com.br/noticias-mobile");
-                    StartActivity(intent0);
-
-                    //fragment = Fragment_Ajuda.NewInstance();
-                    //this.Title = "Ajuda";
-                    //SupportFragmentManager.BeginTransaction().Replace(Resource.Id.content_frame, fragment).Commit();
+                    StartActivity(typeof(Activity_WebView));
                     break;
 
 

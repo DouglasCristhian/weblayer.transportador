@@ -617,7 +617,6 @@ namespace weblayer.transportador.android.exp.Activities
             {
                 if (grantResults[0] == Permission.Granted)
                 {
-                    //lercheck = true;
                     if ((camcheck == true) && (lercheck == true))
                     {
                         PROSSEGUIR = true;
