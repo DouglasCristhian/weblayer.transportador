@@ -124,11 +124,6 @@
     <Compile Include="Adapters\mySpinner.cs" />
     <Compile Include="Fragments\Fragment_ImageView.cs" />
     <Compile Include="Fragments\Fragment_Legendas.cs" />
-    <Compile Include="Helpers\ByteHelper.cs" />
-    <Compile Include="Helpers\DatePicker_Helper.cs" />
-    <Compile Include="Helpers\Mask.cs" />
-    <Compile Include="Helpers\Substring_Helper.cs" />
-    <Compile Include="Helpers\TimePicker_Helper.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -136,7 +131,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
-    <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\Fragment_Legendas.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
@@ -353,6 +347,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\SplashLayout.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -19,7 +19,7 @@ namespace weblayer.transportador.android.pro.Activities.Menu
     public class Activity_Menu : Activity
     {
         ListView ListViewEntrega;
-        List<core.Model.Entrega> ListaEntregas;
+        List<transportador.core.Model.Entrega> ListaEntregas;
         private TextView txtEntregas;
         Android.Support.V7.Widget.Toolbar toolbar;
         private int dataEmissao;
@@ -29,7 +29,7 @@ namespace weblayer.transportador.android.pro.Activities.Menu
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Activity_Menu);
 
-            core.DAL.Database.Initialize();
+            transportador.core.DAL.Database.Initialize();
 
             FindViews();
             BindData();
@@ -146,7 +146,7 @@ namespace weblayer.transportador.android.pro.Activities.Menu
 
         public void SincronizarTeste()
         {
-            foreach (core.Model.Entrega item in ListaEntregas)
+            foreach (transportador.core.Model.Entrega item in ListaEntregas)
             {
                 EntregaRepository rep = new EntregaRepository();
 
@@ -169,7 +169,7 @@ namespace weblayer.transportador.android.pro.Activities.Menu
             return base.OnOptionsItemSelected(item);
         }
 
-        private void Delete(core.Model.Entrega ent)
+        private void Delete(transportador.core.Model.Entrega ent)
         {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 

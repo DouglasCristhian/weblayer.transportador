@@ -1,4 +1,4 @@
-namespace weblayer.transportador.android.pro.Helpers
+namespace weblayer.transportador.android.core.Helpers
 {
     public class Substring_Helper
     {
