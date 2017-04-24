@@ -1,15 +1,16 @@
-using System;
-using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.Collections.Generic;
 using weblayer.transportador.android.exp.Adapters;
 using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.Model;
 
-namespace weblayer.transportador.android.exp.Activities.Menu
+namespace weblayer.transportador.android.exp.Activities
 {
     [Activity(MainLauncher = false, ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation | Android.Content.PM.ConfigChanges.ScreenSize)]
     public class Activity_Menu : AppCompatActivity
@@ -26,7 +27,7 @@ namespace weblayer.transportador.android.exp.Activities.Menu
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Activity_Menu);
 
-            core.DAL.Database.Initialize();
+            transportador.core.DAL.Database.Initialize();
 
             FindViews();
             BindData();

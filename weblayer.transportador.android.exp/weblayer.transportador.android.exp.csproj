@@ -161,12 +161,6 @@
     <Compile Include="Adapters\mySpinner.cs" />
     <Compile Include="Fragments\FragmentImageView.cs" />
     <Compile Include="Fragments\Fragment_Geolocalizacao.cs" />
-    <Compile Include="Helpers\ByteHelper.cs" />
-    <Compile Include="Helpers\DatePicker_Helper.cs" />
-    <Compile Include="Helpers\DialogEventArgs.cs" />
-    <Compile Include="Helpers\Mask.cs" />
-    <Compile Include="Helpers\Substring_Helper.cs" />
-    <Compile Include="Helpers\TimePicker_Helper.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -300,15 +294,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_next.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Embarcador_Logo512x512.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\GoogleImage1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidAsset Include="Assets\GoogleImage2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\mipmap-hdpi\ic_tune.png" />
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +379,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-land-hdpi\ic_launcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

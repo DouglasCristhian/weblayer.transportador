@@ -49,6 +49,12 @@
     <Compile Include="DAL\EntregaRepository.cs" />
     <Compile Include="DAL\OcorrenciaRepository.cs" />
     <Compile Include="DateHelper.cs" />
+    <Compile Include="Helpers\ByteHelper.cs" />
+    <Compile Include="Helpers\DatePicker_Helper.cs" />
+    <Compile Include="Helpers\DialogEventArgs.cs" />
+    <Compile Include="Helpers\Mask.cs" />
+    <Compile Include="Helpers\Substring_Helper.cs" />
+    <Compile Include="Helpers\TimePicker_Helper.cs" />
     <Compile Include="Model\Entrega.cs" />
     <Compile Include="Model\Ocorrencia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

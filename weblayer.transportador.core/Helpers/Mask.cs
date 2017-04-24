@@ -1,18 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.Text;
+using Android.Widget;
 using Java.Lang;
 
-namespace weblayer.transportador.android.pro.Helpers
+namespace weblayer.transportador.android.core.Helpers
 {
     public class Mask : Java.Lang.Object, ITextWatcher
     {
@@ -67,8 +57,9 @@ namespace weblayer.transportador.android.pro.Helpers
                 {
                     mascara += str[i];
                 }
-                catch (System.Exception ex)
+                catch (System.Exception)
                 {
+
                     break;
                 }
                 i++;

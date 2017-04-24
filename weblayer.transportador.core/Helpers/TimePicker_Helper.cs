@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace weblayer.transportador.android.exp.Helpers
+namespace weblayer.transportador.android.core.Helpers
 {
     public class TimePickerHelper : DialogFragment, TimePickerDialog.IOnTimeSetListener
     {
