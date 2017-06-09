@@ -13,12 +13,12 @@ namespace weblayer.transportador.android.exp.Activities
     public class Activity_Geolocalizacao : Activity, ILocationListener
     {
         string mensagem;
-        string endereco;
+        string endereco = "";
         Location currentLocation;
         LocationManager locationManager;
 
         string locationProvider;
-        string locationText;
+        //string locationText;
 
         protected override void OnCreate(Bundle bundle)
         {

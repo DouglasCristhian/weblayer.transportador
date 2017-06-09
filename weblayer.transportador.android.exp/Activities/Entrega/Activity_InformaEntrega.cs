@@ -139,7 +139,7 @@ namespace weblayer.transportador.android.exp.Activities
                 menu.RemoveItem(Resource.Id.action_sair);
                 menu.RemoveItem(Resource.Id.action_filtrar);
             }
-
+            menu.RemoveItem(Resource.Id.action_contato);
 
             return base.OnCreateOptionsMenu(menu);
         }

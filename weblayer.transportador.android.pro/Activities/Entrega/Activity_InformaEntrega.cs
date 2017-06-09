@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Threading;
 using Android;
 using Android.App;
 using Android.Content;
@@ -14,6 +9,11 @@ using Android.Provider;
 using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Threading;
 using weblayer.transportador.android.pro.Activities.Geolocalizacao;
 using weblayer.transportador.android.pro.Activities.Menu;
 using weblayer.transportador.android.pro.Adapters;
@@ -150,6 +150,7 @@ namespace weblayer.transportador.android.pro.Activities.Entrega
                 menu.RemoveItem(Resource.Id.action_sincronizar);
                 menu.RemoveItem(Resource.Id.action_legenda);
             }
+            menu.RemoveItem(Resource.Id.action_contato);
 
             return base.OnCreateOptionsMenu(menu);
         }

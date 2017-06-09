@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
+using weblayer.transportador.android.exp.Activities.Menu;
 using weblayer.transportador.android.exp.Adapters;
 using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.Model;
@@ -112,6 +113,11 @@ namespace weblayer.transportador.android.exp.Activities
                 case Resource.Id.action_filtrar:
                     Intent intent4 = new Intent(this, typeof(Activity_FiltrarEntregas));
                     StartActivityForResult(intent4, 0);
+                    break;
+
+                case Resource.Id.action_contato:
+                    Intent intent5 = new Intent(this, typeof(Activity_Contato));
+                    StartActivityForResult(intent5, 0);
                     break;
 
                 case Resource.Id.action_sair:

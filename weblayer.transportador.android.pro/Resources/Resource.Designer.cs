@@ -1645,43 +1645,52 @@ namespace weblayer.transportador.android.pro
 			public const int EditTextStyle = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int notification_action_background = 2130837592;
+			public const int ic_contatoemail = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int notification_bg = 2130837593;
+			public const int ic_contatosite = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int notification_bg_low = 2130837594;
+			public const int ic_contatotel = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
-			public const int notification_bg_low_normal = 2130837595;
+			public const int notification_action_background = 2130837595;
 			
 			// aapt resource value: 0x7f02005c
-			public const int notification_bg_low_pressed = 2130837596;
+			public const int notification_bg = 2130837596;
 			
 			// aapt resource value: 0x7f02005d
-			public const int notification_bg_normal = 2130837597;
+			public const int notification_bg_low = 2130837597;
 			
 			// aapt resource value: 0x7f02005e
-			public const int notification_bg_normal_pressed = 2130837598;
+			public const int notification_bg_low_normal = 2130837598;
 			
 			// aapt resource value: 0x7f02005f
-			public const int notification_icon_background = 2130837599;
-			
-			// aapt resource value: 0x7f020063
-			public const int notification_template_icon_bg = 2130837603;
-			
-			// aapt resource value: 0x7f020064
-			public const int notification_template_icon_low_bg = 2130837604;
+			public const int notification_bg_low_pressed = 2130837599;
 			
 			// aapt resource value: 0x7f020060
-			public const int notification_tile_bg = 2130837600;
+			public const int notification_bg_normal = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int notify_panel_notification_icon_bg = 2130837601;
+			public const int notification_bg_normal_pressed = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int SplashScreen = 2130837602;
+			public const int notification_icon_background = 2130837602;
+			
+			// aapt resource value: 0x7f020066
+			public const int notification_template_icon_bg = 2130837606;
+			
+			// aapt resource value: 0x7f020067
+			public const int notification_template_icon_low_bg = 2130837607;
+			
+			// aapt resource value: 0x7f020063
+			public const int notification_tile_bg = 2130837603;
+			
+			// aapt resource value: 0x7f020064
+			public const int notify_panel_notification_icon_bg = 2130837604;
+			
+			// aapt resource value: 0x7f020065
+			public const int SplashScreen = 2130837605;
 			
 			static Drawable()
 			{
@@ -2442,22 +2451,31 @@ namespace weblayer.transportador.android.pro
 			public const int ic_add = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int ic_delete = 2130903041;
+			public const int ic_contatoemail = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int ic_help = 2130903042;
+			public const int ic_contatosite = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int ic_launcher = 2130903043;
+			public const int ic_contatotel = 2130903043;
 			
 			// aapt resource value: 0x7f030004
-			public const int ic_launcherback = 2130903044;
+			public const int ic_delete = 2130903044;
 			
 			// aapt resource value: 0x7f030005
-			public const int ic_next = 2130903045;
+			public const int ic_help = 2130903045;
 			
 			// aapt resource value: 0x7f030006
-			public const int ic_tune = 2130903046;
+			public const int ic_launcher = 2130903046;
+			
+			// aapt resource value: 0x7f030007
+			public const int ic_launcherback = 2130903047;
+			
+			// aapt resource value: 0x7f030008
+			public const int ic_next = 2130903048;
+			
+			// aapt resource value: 0x7f030009
+			public const int ic_tune = 2130903049;
 			
 			static Mipmap()
 			{

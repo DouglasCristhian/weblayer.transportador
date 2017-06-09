@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using System.Collections.Generic;
 
 namespace weblayer.transportador.android.pro.Activities.Menu
 {
@@ -66,6 +66,7 @@ namespace weblayer.transportador.android.pro.Activities.Menu
             menu.RemoveItem(Resource.Id.action_sincronizar);
             menu.RemoveItem(Resource.Id.action_legenda);
             menu.RemoveItem(Resource.Id.action_filtrar);
+            menu.RemoveItem(Resource.Id.action_contato);
 
             return base.OnCreateOptionsMenu(menu);
         }

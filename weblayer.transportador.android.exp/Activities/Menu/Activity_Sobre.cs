@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
+using System.Collections.Generic;
 
 namespace weblayer.transportador.android.exp.Activities
 {
@@ -64,6 +64,7 @@ namespace weblayer.transportador.android.exp.Activities
             menu.RemoveItem(Resource.Id.action_sobre);
             menu.RemoveItem(Resource.Id.action_sair);
             menu.RemoveItem(Resource.Id.action_filtrar);
+            menu.RemoveItem(Resource.Id.action_contato);
 
             return base.OnCreateOptionsMenu(menu);
         }

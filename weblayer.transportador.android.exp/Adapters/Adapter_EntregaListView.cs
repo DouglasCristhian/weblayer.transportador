@@ -59,13 +59,11 @@ namespace weblayer.transportador.android.exp.Adapters
                 descricaoocorrencia = "DEVOLUÇÃO";
 
             row.FindViewById<TextView>(Resource.Id.ds_NFE).Text = "NFe: " + mItems[position].ds_NFE;
-
             row.FindViewById<TextView>(Resource.Id.id_ocorrencia).Text = "Ocorrência: " + descricaoocorrencia;
             row.FindViewById<TextView>(Resource.Id.dt_entrega).Text = "Data da Ocorrência: " + mItems[position].dt_entrega.Value.ToString("dd/MM/yyyy HH:mm");
             row.FindViewById<TextView>(Resource.Id.dt_inclusao).Text = "Data da Inclusão: " + mItems[position].dt_inclusao.Value.ToString("dd/MM/yyyy HH:mm");
 
             return row;
         }
-
     }
 }

@@ -61,6 +61,7 @@ namespace weblayer.transportador.android.pro.Activities.Menu
             menu.RemoveItem(Resource.Id.action_sincronizar);
             menu.RemoveItem(Resource.Id.action_legenda);
             menu.RemoveItem(Resource.Id.action_filtrar);
+            menu.RemoveItem(Resource.Id.action_contato);
 
             return base.OnCreateOptionsMenu(menu);
         }

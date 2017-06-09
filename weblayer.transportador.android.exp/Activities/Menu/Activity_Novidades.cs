@@ -44,10 +44,10 @@ namespace weblayer.transportador.android.exp.Activities
         {
 
             var Novidades = " 1.5 (23/03/2017):"
-            + "\n[Melhoria] Implemetação do foco automático no scaneamento da NFe"
+            + "\n[Melhoria] Implementação do foco automático no escaneamento da NFe"
             + "\n\n";
 
-            Novidades = Novidades  +  " 1.4 (15/03/2017):"
+            Novidades = Novidades + " 1.4 (15/03/2017):"
             + "\n[Novo] Filtro de entregas por data de inclusão"
             + "\n\n";
 
@@ -73,6 +73,7 @@ namespace weblayer.transportador.android.exp.Activities
             menu.RemoveItem(Resource.Id.action_sobre);
             menu.RemoveItem(Resource.Id.action_sair);
             menu.RemoveItem(Resource.Id.action_filtrar);
+            menu.RemoveItem(Resource.Id.action_contato);
 
             return base.OnCreateOptionsMenu(menu);
         }
