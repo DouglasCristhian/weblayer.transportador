@@ -18,7 +18,7 @@ using weblayer.transportador.android.pro.Activities.Geolocalizacao;
 using weblayer.transportador.android.pro.Activities.Menu;
 using weblayer.transportador.android.pro.Adapters;
 using weblayer.transportador.android.pro.Fragments;
-using weblayer.transportador.android.pro.Helpers;
+using weblayer.transportador.android.core.Helpers;
 using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.DAL;
 using ZXing.Mobile;
@@ -56,7 +56,7 @@ namespace weblayer.transportador.android.pro.Activities.Entrega
         private CheckBox checkBoxGeolocalizacao;
         private byte[] bytes;
         private Android.Graphics.Bitmap bitmap;
-        private core.Model.Entrega entrega;
+        private transportador.core.Model.Entrega entrega;
         private string operacao;
         private string spinOcorrencia;
         private string descricaoocorrencia;
@@ -258,7 +258,7 @@ namespace weblayer.transportador.android.pro.Activities.Entrega
         private void BindModel()
         {
             if (entrega == null)
-                entrega = new core.Model.Entrega();
+                entrega = new transportador.core.Model.Entrega();
 
             entrega.ds_NFE = txtCodigoNF.Text.ToString();
 

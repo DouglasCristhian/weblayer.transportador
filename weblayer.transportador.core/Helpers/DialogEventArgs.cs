@@ -1,4 +1,4 @@
-namespace weblayer.transportador.android.exp.Helpers
+namespace weblayer.transportador.android.core.Helpers
 {
     public class DialogEventArgs
     {

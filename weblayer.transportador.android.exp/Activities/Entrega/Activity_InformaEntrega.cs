@@ -16,7 +16,7 @@ using System.IO;
 using System.Threading;
 using weblayer.transportador.android.exp.Adapters;
 using weblayer.transportador.android.exp.Fragments;
-using weblayer.transportador.android.exp.Helpers;
+using weblayer.transportador.android.core.Helpers;
 using weblayer.transportador.core.BLL;
 using weblayer.transportador.core.DAL;
 using weblayer.transportador.core.Model;

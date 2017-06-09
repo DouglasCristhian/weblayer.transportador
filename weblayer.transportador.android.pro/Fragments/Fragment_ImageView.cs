@@ -5,7 +5,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using UK.CO.Senab.Photoview;
-using weblayer.transportador.android.pro.Helpers;
+using weblayer.transportador.android.core.Helpers;
 
 namespace weblayer.transportador.android.pro.Fragments
 {

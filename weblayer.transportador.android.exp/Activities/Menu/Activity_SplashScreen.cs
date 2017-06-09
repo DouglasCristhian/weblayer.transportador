@@ -28,7 +28,7 @@ namespace weblayer.transportador.android.exp.Activities
 
         private void LoadActivity()
         {
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(3000);
             RunOnUiThread(() => StartActivity(typeof(Activity_Menu)));
         }
     }
