@@ -117,6 +117,12 @@ namespace weblayer.transportador.android.pro.Activities.Menu
                     StartActivityForResult(intent3, 0);
                     break;
 
+
+                case Resource.Id.action_contato:
+                    Intent intent4 = new Intent(this, typeof(Activity_Contato));
+                    StartActivityForResult(intent4, 0);
+                    break;
+
                 case Resource.Id.action_sair:
                     Finish();
                     break;
