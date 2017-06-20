@@ -8,7 +8,7 @@
   android:background="@color/colorPrimary"
   android:textAppearance="?android:attr/textAppearanceSmall"
   android:elevation="3dp"
-  app:theme="@style/ToolbarTheme"
+  android:theme="@style/ToolbarTheme"
   app:popupTheme="@style/PopupTheme"
   app:titleTextAppearance="@style/TitleToolbar">
 
