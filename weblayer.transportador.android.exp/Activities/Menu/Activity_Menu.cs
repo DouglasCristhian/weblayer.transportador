@@ -28,7 +28,7 @@ namespace weblayer.transportador.android.exp.Activities
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Activity_Menu);
 
-            transportador.core.DAL.Database.Initialize();
+            transportador.core.DAL.Database.Inicializar();
 
             FindViews();
             BindData();

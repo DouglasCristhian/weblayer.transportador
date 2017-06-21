@@ -910,7 +910,7 @@ namespace weblayer.transportador.android.exp.Activities
 
         private void SaveForm()
         {
-            var prefs = Application.Context.GetSharedPreferences(MyPREFERENCES, FileCreationMode.WorldWriteable);
+            var prefs = Application.Context.GetSharedPreferences(MyPREFERENCES, FileCreationMode.Private);
             var prefEditor = prefs.Edit();
             prefEditor.PutInt("Soma", count);
             prefEditor.Commit();
@@ -918,7 +918,7 @@ namespace weblayer.transportador.android.exp.Activities
 
         private void RestoreForm()
         {
-            var prefs = Application.Context.GetSharedPreferences(MyPREFERENCES, FileCreationMode.WorldReadable);
+            var prefs = Application.Context.GetSharedPreferences(MyPREFERENCES, FileCreationMode.Private);
             var somePref = prefs.GetInt("Soma", 0);
             count = somePref;
         }

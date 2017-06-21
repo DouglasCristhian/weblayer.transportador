@@ -8,6 +8,11 @@ namespace weblayer.transportador.core.DAL
     {
         private static readonly string Path = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "database.db");
 
+        public static void Inicializar()
+        {
+            Initialize();
+        }
+
         public Database(string databasePath, bool storeDateTimeAsTicks = true) : base(databasePath, storeDateTimeAsTicks)
         {
         }

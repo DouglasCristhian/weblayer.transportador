@@ -36,7 +36,7 @@ namespace weblayer.transportador.android.pro.Activities.Entrega
             spinnerDatas = PopulateSpinner();
             spinnerDataEmissao.Adapter = new ArrayAdapter<mySpinner>(this, Android.Resource.Layout.SimpleSpinnerDropDownItem, spinnerDatas);
 
-            var prefs = Application.Context.GetSharedPreferences(MyPREFERENCES, FileCreationMode.WorldReadable);
+            var prefs = Application.Context.GetSharedPreferences(MyPREFERENCES, FileCreationMode.Private);
             int resultado = prefs.GetInt("Id_DataEmissao", 0);
             spinnerDataEmissao.SetSelection(getIndexByValue(spinnerDataEmissao, resultado));
         }
@@ -112,7 +112,7 @@ namespace weblayer.transportador.android.pro.Activities.Entrega
 
         private void SaveForm()
         {
-            var prefs = Application.Context.GetSharedPreferences("MyPrefs", FileCreationMode.WorldWriteable);
+            var prefs = Application.Context.GetSharedPreferences("MyPrefs", FileCreationMode.Private);
             var prefEditor = prefs.Edit();
 
             prefEditor.PutInt("Id_DataEmissao", spinnerDataEmissao.SelectedItemPosition);
@@ -144,7 +144,7 @@ namespace weblayer.transportador.android.pro.Activities.Entrega
 
         private void RestoreForm()
         {
-            var prefs = Application.Context.GetSharedPreferences(MyPREFERENCES, FileCreationMode.WorldReadable);
+            var prefs = Application.Context.GetSharedPreferences(MyPREFERENCES, FileCreationMode.Private);
         }
     }
 }
